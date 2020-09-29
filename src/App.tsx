@@ -38,7 +38,7 @@ const App: React.FC = () => {
 
   return (
     <StoreProvider>
-      <BrowserRouter>
+      <BrowserRouter basename="/">
         <Main>
           <Index />
         </Main>

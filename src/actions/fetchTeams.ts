@@ -14,40 +14,60 @@ import { API_ENDPOINTS } from '../utils/constants';
 import { sleep } from '../utils/functions';
 
 const data = [
-  { id: 1, title: 'Virtus.Pro' },
-  { id: 3201, title: 'Аренда автомобилей' },
-  { id: 3273, title: 'Автотовары' },
-  { id: 3205, title: 'Автосалон' },
-  { id: 3282, title: 'Автосервис' },
-  { id: 3283, title: 'Услуги для автовладельцев' },
-  { id: 3284, title: 'Велосипеды' },
-  { id: 3285, title: 'Мотоциклы и другая мототехника' },
-  { id: 3286, title: 'Водный транспорт' },
-  { id: 3287, title: 'Автопроизводитель' },
-  { id: 3288, title: 'Автомойка' },
-  { id: 3117, title: 'Автошкола' },
-  { id: 3118, title: 'Детский сад' },
-  { id: 3119, title: 'Гимназия' },
-  { id: 3120, title: 'Колледж' },
-  { id: 3121, title: 'Лицей' },
-  { id: 3122, title: 'Техникум' },
-  { id: 3123, title: 'Университет' },
-  { id: 3124, title: 'Школа' },
-  { id: 3125, title: 'Институт' },
-  { id: 3126, title: 'Обучающие курсы' },
-  { id: 3276, title: 'Дополнительное образование' },
-  { id: 3275, title: 'Тренинг, семинар' },
-  { id: 3127, title: 'Танцевальная школа' },
+  {
+    id: 1,
+    title: 'Virtus.Pro',
+    photo_100:
+      'https://upload.wikimedia.org/wikipedia/ru/4/4f/Virtus.proLogo.png',
+    photo_200:
+      'https://upload.wikimedia.org/wikipedia/ru/4/4f/Virtus.proLogo.png',
+    photo_max_orig:
+      'https://upload.wikimedia.org/wikipedia/ru/4/4f/Virtus.proLogo.png',
+  },
+  {
+    id: 3201,
+    title: 'Nigma',
+    photo_100:
+      'https://images.prismic.io/rivalryglhf/79e23f1b-fc88-4ddd-bee2-de7f1a45028a_nigma.jpg?auto=compress,format',
+    photo_200:
+      'https://images.prismic.io/rivalryglhf/79e23f1b-fc88-4ddd-bee2-de7f1a45028a_nigma.jpg?auto=compress,format',
+    photo_max_orig:
+      'https://images.prismic.io/rivalryglhf/79e23f1b-fc88-4ddd-bee2-de7f1a45028a_nigma.jpg?auto=compress,format',
+  },
+  {
+    id: 3273,
+    title: 'Liquid',
+    photo_100:
+      'https://pbs.twimg.com/profile_images/898236182215221248/W22xXcbK.jpg',
+    photo_200:
+      'https://pbs.twimg.com/profile_images/898236182215221248/W22xXcbK.jpg',
+    photo_max_orig:
+      'https://pbs.twimg.com/profile_images/898236182215221248/W22xXcbK.jpg',
+  },
+  {
+    id: 3205,
+    title: 'Natus Vincere',
+    photo_100:
+      'https://cdn1.dotesports.com/wp-content/uploads/2019/07/24154332/navi.jpg',
+    photo_200:
+      'https://cdn1.dotesports.com/wp-content/uploads/2019/07/24154332/navi.jpg',
+    photo_max_orig:
+      'https://cdn1.dotesports.com/wp-content/uploads/2019/07/24154332/navi.jpg',
+  },
+  {
+    id: 3282,
+    title: 'Gambit',
+    photo_100:
+      'https://assets.faceit-cdn.net/teams_avatars/c871c10d-3a82-4c32-ac5b-10a8d347dde9_1550802243160.jpg',
+    photo_200:
+      'https://assets.faceit-cdn.net/teams_avatars/c871c10d-3a82-4c32-ac5b-10a8d347dde9_1550802243160.jpg',
+    photo_max_orig:
+      'https://assets.faceit-cdn.net/teams_avatars/c871c10d-3a82-4c32-ac5b-10a8d347dde9_1550802243160.jpg',
+  },
 ].map((el) => ({
   ...el,
   ...{
     tag: 'BRUH',
-    photo_100:
-      'https://upload.wikimedia.org/wikipedia/ru/2/2c/NAVI_logo.png',
-    photo_200:
-      'https://upload.wikimedia.org/wikipedia/ru/2/2c/NAVI_logo.png',
-    photo_max_orig:
-      'https://upload.wikimedia.org/wikipedia/ru/2/2c/NAVI_logo.png',
     rating: 0,
   },
 }));

@@ -64,17 +64,7 @@ const data = [
     photo_max_orig:
       'https://upload.wikimedia.org/wikipedia/commons/9/94/Oleg_Gazmanov_30_October_2010.jpg',
   },
-].map((el) => ({
-  ...el,
-  ...{
-    photo_100:
-      'https://pbs.twimg.com/profile_images/1280494492974493698/KqYCFM3j.jpg',
-    photo_200:
-      'https://pbs.twimg.com/profile_images/1280494492974493698/KqYCFM3j.jpg',
-    photo_max_orig:
-      'https://pbs.twimg.com/profile_images/1280494492974493698/KqYCFM3j.jpg',
-  },
-}));
+];
 
 const fetchPlayer = (id: number | string) => {
   return async (dispatch: Dispatch) => {

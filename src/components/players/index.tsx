@@ -78,10 +78,7 @@ const Profile: React.FC = () => {
                 caption="Хабаровск, Россия"
                 text="Immortal, 1000"
                 before={
-                  <Avatar
-                    size={72}
-                    src="https://pbs.twimg.com/profile_images/1280494492974493698/KqYCFM3j.jpg"
-                  />
+                  <Avatar size={72} src={item.photo_100} />
                 }
                 actions={
                   <React.Fragment>
