@@ -18,11 +18,11 @@ import {
   Icon28UserCircleOutline,
 } from '@vkontakte/icons';
 
-import NewsPanel from './News';
-import ServicesPanel from './Services';
-import MessagesPanel from './Messages';
-import ClipsPanel from './Clips';
 import ProfilePanel from './Profile';
+import TeamsPanel from './Teams';
+import PlayersPanel from './Players';
+import MatchesPanel from './Matches';
+import RanksPanel from './Ranks';
 
 const Index: React.FC = () => {
   const location = useLocation();
@@ -51,57 +51,53 @@ const Index: React.FC = () => {
         <Tabbar>
           <TabbarItem
             onClick={onClick}
-            selected={pathname.includes('/news')}
-            data-story="/news"
-            text="Новости"
+            selected={pathname.includes('/profile')}
+            data-story="/profile"
+            text="Профиль"
           >
             <Icon28NewsfeedOutline />
           </TabbarItem>
           <TabbarItem
             onClick={onClick}
-            selected={pathname.includes('/services')}
-            data-story="/services"
-            text="Сервисы"
+            selected={pathname.includes('/teams')}
+            data-story="/teams"
+            text="Команды"
           >
             <Icon28ServicesOutline />
           </TabbarItem>
           <TabbarItem
             onClick={onClick}
-            selected={pathname.includes('/messages')}
-            data-story="/messages"
+            selected={pathname.includes('/players')}
+            data-story="/players"
             label="12"
-            text="Сообщения"
+            text="Игроки"
           >
             <Icon28MessageOutline />
           </TabbarItem>
           <TabbarItem
             onClick={onClick}
-            selected={pathname.includes('/clips')}
-            data-story="/clips"
-            text="Клипы"
+            selected={pathname.includes('/matches')}
+            data-story="/matches"
+            text="Матчи"
           >
             <Icon28ClipOutline />
           </TabbarItem>
           <TabbarItem
             onClick={onClick}
-            selected={pathname.includes('/profile')}
-            data-story="/profile"
-            text="Профиль"
+            selected={pathname.includes('/ranks')}
+            data-story="/ranks"
+            text="Рейтинг"
           >
             <Icon28UserCircleOutline />
           </TabbarItem>
         </Tabbar>
       }
     >
-      <NewsPanel id="news" />
-
-      <ServicesPanel id="services" />
-
-      <MessagesPanel id="messages" />
-
-      <ClipsPanel id="clips" />
-
       <ProfilePanel id="profile" />
+      <TeamsPanel id="teams" />
+      <PlayersPanel id="players" />
+      <MatchesPanel id="matches" />
+      <RanksPanel id="ranks" />
     </Epic>
   );
 };

@@ -6,24 +6,24 @@ import PanelWrapper from '../utils/wrappers/PanelWrapper';
 import Panel from '@vkontakte/vkui/dist/components/Panel/Panel';
 import PanelHeader from '@vkontakte/vkui/dist/components/PanelHeader/PanelHeader';
 
-type ServicesProps = {
+type MatchesProps = {
   id: string;
 };
 
-const Services: React.FC<ServicesProps> = ({
+const Matches: React.FC<MatchesProps> = ({
   id,
-}: ServicesProps) => {
+}: MatchesProps) => {
   const [fetching] = useState(false);
 
   return (
     <Route
-      path="/services"
+      path="/matches"
       exact
       component={() => (
         <PanelWrapper id={id} fetching={fetching}>
           <Panel id={id}>
-            <PanelHeader>Services</PanelHeader>
-            {/* <ServicesComponent data={user} /> */}
+            <PanelHeader>Matches</PanelHeader>
+            {/* <MatchesComponent data={user} /> */}
           </Panel>
         </PanelWrapper>
       )}
@@ -31,4 +31,4 @@ const Services: React.FC<ServicesProps> = ({
   );
 };
 
-export default Services;
+export default Matches;

@@ -19,7 +19,7 @@ const News: React.FC = () => (
     <Group title="Navigation Example">
       <FixedLayout vertical="bottom">
         <Div>
-          <LinkButton to="/news/id">
+          <LinkButton to="/profile/id">
             Go to child route
           </LinkButton>
         </Div>

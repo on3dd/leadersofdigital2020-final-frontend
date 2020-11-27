@@ -42,7 +42,7 @@ const App: React.FC = () => {
         <Route
           path="/"
           exact
-          render={() => <Redirect to="/news" />}
+          render={() => <Redirect to="/profile" />}
         />
 
         <Main>
