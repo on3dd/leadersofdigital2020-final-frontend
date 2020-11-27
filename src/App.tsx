@@ -1,5 +1,9 @@
 import React, { useEffect } from 'react';
-import { BrowserRouter, Route } from 'react-router-dom';
+import {
+  BrowserRouter,
+  Route,
+  Redirect,
+} from 'react-router-dom';
 
 import styled from 'styled-components';
 import bridge from '@vkontakte/vk-bridge';
@@ -8,9 +12,7 @@ import '@vkontakte/vkui/dist/vkui.css';
 
 import StoreProvider from './utils/StoreProvider';
 
-import Home from './panels/Home';
-import Photos from './panels/Photos';
-import Photo from './panels/Photo';
+import Index from './panels';
 
 const Main = styled.main``;
 
@@ -37,21 +39,14 @@ const App: React.FC = () => {
   return (
     <StoreProvider>
       <BrowserRouter>
+        <Route
+          path="/"
+          exact
+          render={() => <Redirect to="/news" />}
+        />
+
         <Main>
-          <Route
-            path="/"
-            exact
-            component={() => <Home id="home" />}
-          />
-          <Route
-            path="/photos"
-            exact
-            component={() => <Photos id="photos" />}
-          />
-          <Route
-            path="/photos/:id"
-            component={() => <Photo id="photo" />}
-          />
+          <Index />
         </Main>
       </BrowserRouter>
     </StoreProvider>
