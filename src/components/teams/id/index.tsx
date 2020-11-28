@@ -4,6 +4,8 @@ import React, {
   useCallback,
 } from 'react';
 
+import { MODAL_TYPES } from '../../../utils/constants';
+
 import Group from '@vkontakte/vkui/dist/components/Group/Group';
 import Div from '@vkontakte/vkui/dist/components/Div/Div';
 import Cell from '@vkontakte/vkui/dist/components/Cell/Cell';
@@ -22,6 +24,10 @@ import {
   Icon28ListOutline,
 } from '@vkontakte/icons';
 
+type Props = {
+  updateActiveModal: (modal: any) => void; // TODO: FIX ANY
+};
+
 const itemStyle = {
   flexShrink: 0,
   width: 80,
@@ -37,7 +43,9 @@ const textStyle = {
   color: 'rgb(129, 140, 153)',
 } as any;
 
-const NewsItem: React.FC = () => (
+const NewsItem: React.FC<Props> = ({
+  updateActiveModal,
+}: Props) => (
   <Div>
     <Group
       title="Info"
@@ -114,7 +122,12 @@ const NewsItem: React.FC = () => (
       </HorizontalScroll>
     </Group>
     <Group title="Stats" separator="hide">
-      <Cell before={<Icon28CalendarOutline />}>
+      <Cell
+        before={<Icon28CalendarOutline />}
+        onClick={() =>
+          updateActiveModal(MODAL_TYPES.MATCH_SCHEDULE)
+        }
+      >
         Расписание матчей
       </Cell>
     </Group>
@@ -124,6 +137,9 @@ const NewsItem: React.FC = () => (
         asideContent={
           <Text weight="regular">322 место</Text>
         }
+        onClick={() =>
+          updateActiveModal(MODAL_TYPES.STATISTICS)
+        }
       >
         Статистика
       </Cell>
@@ -132,6 +148,9 @@ const NewsItem: React.FC = () => (
       <Cell
         before={<Icon28ListOutline />}
         asideContent={<Text weight="regular">22W/8L</Text>}
+        onClick={() =>
+          updateActiveModal(MODAL_TYPES.LAST_GAMES)
+        }
       >
         Последние матчи
       </Cell>

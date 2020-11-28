@@ -5,6 +5,8 @@ import React, {
 } from 'react';
 import { Route } from 'react-router-dom';
 
+import { Modal } from '@test';
+
 import PanelWrapper from '../utils/wrappers/PanelWrapper';
 import {
   MODAL_TYPES,
@@ -33,8 +35,6 @@ type ProfileProps = {
   id: string;
 };
 
-type Modal = string | null;
-
 const Profile: React.FC<ProfileProps> = ({
   id,
 }: ProfileProps) => {
@@ -60,20 +60,20 @@ const Profile: React.FC<ProfileProps> = ({
         setModalHistory((prev) => [...prev, activeModal]);
       }
     },
-    [modalHistory, setActiveModal, setModalHistory],
+    [modalHistory],
   );
 
   const modalClose = useCallback(() => {
     return updateActiveModal(
       modalHistory[modalHistory.length - 2],
     );
-  }, [modalHistory, updateActiveModal]);
+  }, [modalHistory]);
 
   const modalBack = useCallback(() => {
     return updateActiveModal(
       modalHistory[modalHistory.length - 2],
     );
-  }, [modalHistory, updateActiveModal]);
+  }, [modalHistory]);
 
   const header = useCallback(
     (title: string = '') => (
@@ -124,7 +124,7 @@ const Profile: React.FC<ProfileProps> = ({
         </ModalPage>
       </ModalRoot>
     ),
-    [activeModal, modalClose, modalBack],
+    [activeModal],
   );
 
   return (

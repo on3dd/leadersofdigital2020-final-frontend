@@ -20,88 +20,106 @@ import {
   Icon28ListOutline,
 } from '@vkontakte/icons';
 
-type ProfileProps = {
+type Props = {
   updateActiveModal: (modal: any) => void; // TODO: FIX ANY
 };
 
-const Profile: React.FC<ProfileProps> = ({
+const achivementStyles = { width: 104, height: 96 };
+
+const Profile: React.FC<Props> = ({
   updateActiveModal,
-}: ProfileProps) => (
-  <Div>
-    <Group title="Info" separator="hide">
-      <Cell
-        size="l"
-        before={
-          <Avatar
-            size={72}
-            src="https://ggscore.com/media/logo/p2888.png"
-          />
-        }
-        description={
-          <Headline weight="regular">
-            Владивосток, Россия
-          </Headline>
-        }
+}: Props) => {
+  const Achievement = () => (
+    <div
+      style={{ ...achivementStyles }}
+      onClick={() =>
+        updateActiveModal(MODAL_TYPES.ACHIEVEMENTS)
+      }
+    />
+  );
+
+  return (
+    <Div>
+      <Group title="Info" separator="hide">
+        <Cell
+          size="l"
+          before={
+            <Avatar
+              size={72}
+              src="https://ggscore.com/media/logo/p2888.png"
+            />
+          }
+          description={
+            <Headline weight="regular">
+              Владивосток, Россия
+            </Headline>
+          }
+        >
+          <Title weight="bold" level="3">
+            Роман Кушнарев
+          </Title>
+        </Cell>
+      </Group>
+      <Group title="Team" separator="hide">
+        <SimpleCell
+          description="Мид"
+          before={
+            <Avatar
+              size={48}
+              src="https://upload.wikimedia.org/wikipedia/ru/thumb/4/4f/Virtus.proLogo.png/1200px-Virtus.proLogo.png"
+            />
+          }
+        >
+          Virtus.Pro
+        </SimpleCell>
+      </Group>
+      <Group title="Stats" separator="hide">
+        <Cell
+          before={<Icon28InfoOutline />}
+          asideContent={
+            <Text weight="regular">322 место</Text>
+          }
+          onClick={() =>
+            updateActiveModal(MODAL_TYPES.STATISTICS)
+          }
+        >
+          Статистика
+        </Cell>
+      </Group>
+      <Group title="Last games" separator="hide">
+        <Cell
+          before={<Icon28ListOutline />}
+          asideContent={
+            <Text weight="regular">22W/8L</Text>
+          }
+          onClick={() =>
+            updateActiveModal(MODAL_TYPES.LAST_GAMES)
+          }
+        >
+          Последние матчи
+        </Cell>
+      </Group>
+      <Group
+        title="Achievements"
+        header={<Header>Достижения</Header>}
       >
-        <Title weight="bold" level="3">
-          Роман Кушнарев
-        </Title>
-      </Cell>
-    </Group>
-    <Group title="Team" separator="hide">
-      <SimpleCell
-        description="Мид"
-        before={
-          <Avatar
-            size={48}
-            src="https://upload.wikimedia.org/wikipedia/ru/thumb/4/4f/Virtus.proLogo.png/1200px-Virtus.proLogo.png"
-          />
-        }
-      >
-        Virtus.Pro
-      </SimpleCell>
-    </Group>
-    <Group title="Stats" separator="hide">
-      <Cell
-        before={<Icon28InfoOutline />}
-        asideContent={
-          <Text weight="regular">322 место</Text>
-        }
-        onClick={() => updateActiveModal(MODAL_TYPES.STATISTICS)}
-      >
-        Статистика
-      </Cell>
-    </Group>
-    <Group title="Last games" separator="hide">
-      <Cell
-        before={<Icon28ListOutline />}
-        asideContent={<Text weight="regular">22W/8L</Text>}
-        onClick={() => updateActiveModal(MODAL_TYPES.LAST_GAMES)}
-      >
-        Последние матчи
-      </Cell>
-    </Group>
-    <Group
-      title="Achievements"
-      header={<Header>Достижения</Header>}
-      onClick={() => updateActiveModal(MODAL_TYPES.ACHIEVEMENTS)}
-    >
-      <CardScroll>
-        <Card size="s">
-          <div style={{ width: 104, height: 96 }} />
-        </Card>
-        <Card size="s">
-          <div style={{ width: 104, height: 96 }} />
-        </Card>
-        <Card size="s">
-          <div style={{ width: 104, height: 96 }} />
-        </Card>
-        <Card size="s">
-          <div style={{ width: 104, height: 96 }} />
-        </Card>
-      </CardScroll>
-    </Group>
-  </Div>
-);
+        <CardScroll>
+          <Card size="s">
+            <Achievement />
+          </Card>
+          <Card size="s">
+            <Achievement />
+          </Card>
+          <Card size="s">
+            <Achievement />
+          </Card>
+          <Card size="s">
+            <Achievement />
+          </Card>
+        </CardScroll>
+      </Group>
+    </Div>
+  );
+};
 
 export default Profile;

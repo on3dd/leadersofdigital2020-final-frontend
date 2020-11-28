@@ -26,10 +26,13 @@ declare module '@test' {
     thumbnailUrl: string;
   }
 
+  export type Modal = string | null;
+
   export interface ModalTypes {
     STATISTICS: 'STATISTICS';
     LAST_GAMES: 'LAST_GAMES';
     ACHIEVEMENTS: 'ACHIEVEMENTS';
+    MATCH_SCHEDULE: 'MATCH_SCHEDULE';
   }
 
   export interface State<T> {

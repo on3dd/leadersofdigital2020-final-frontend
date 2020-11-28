@@ -15,7 +15,6 @@ import RichCell from '@vkontakte/vkui/dist/components/RichCell/RichCell';
 import Search from '@vkontakte/vkui/dist/components/Search/Search';
 import Button from '@vkontakte/vkui/dist/components/Button/Button';
 
-import Title from '@vkontakte/vkui/dist/components/Typography/Title/Title';
 import Header from '@vkontakte/vkui/dist/components/Header/Header';
 
 const data = [
