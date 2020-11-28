@@ -12,6 +12,7 @@ import Avatar from '@vkontakte/vkui/dist/components/Avatar/Avatar';
 import List from '@vkontakte/vkui/dist/components/List/List';
 import RichCell from '@vkontakte/vkui/dist/components/RichCell/RichCell';
 import Button from '@vkontakte/vkui/dist/components/Button/Button';
+import FixedLayout from '@vkontakte/vkui/dist/components/FixedLayout/FixedLayout';
 
 import Headline from '@vkontakte/vkui/dist/components/Typography/Headline/Headline';
 import Text from '@vkontakte/vkui/dist/components/Typography/Text/Text';
@@ -88,17 +89,21 @@ const Profile: React.FC<Props> = ({
 
   return (
     <Div>
-      <Group title="Create" separator="show">
-        <Button
-          stretched
-          size="xl"
-          style={{ marginTop: 0 }}
-          onClick={() =>
-            updateActiveModal(MODAL_TYPES.CREATE_MATCH)
-          }
-        >
-          Создать матч
-        </Button>
+      <Group title="Create" separator="hide">
+        <FixedLayout vertical="bottom">
+          <Div>
+            <Button
+              stretched
+              size="xl"
+              style={{ marginTop: 0 }}
+              onClick={() =>
+                updateActiveModal(MODAL_TYPES.CREATE_MATCH)
+              }
+            >
+              Создать матч
+            </Button>
+          </Div>
+        </FixedLayout>
       </Group>
       <Group
         title="Search"

@@ -1,5 +1,16 @@
-import React, { useState } from 'react';
-import { Route } from 'react-router-dom';
+import React, {
+  useState,
+  useEffect,
+  useCallback,
+} from 'react';
+import { useDispatch } from 'react-redux';
+import { useHistory, Route } from 'react-router-dom';
+
+import bridge from '@vkontakte/vk-bridge';
+
+import { User } from '@test';
+
+import register from '../actions/register';
 
 import PanelWrapper from '../utils/wrappers/PanelWrapper';
 
@@ -8,11 +19,10 @@ import PanelHeader from '@vkontakte/vkui/dist/components/PanelHeader/PanelHeader
 import Div from '@vkontakte/vkui/dist/components/Div/Div';
 import Group from '@vkontakte/vkui/dist/components/Group/Group';
 import FixedLayout from '@vkontakte/vkui/dist/components/FixedLayout/FixedLayout';
+import Button from '@vkontakte/vkui/dist/components/Button/Button';
 
 import Title from '@vkontakte/vkui/dist/components/Typography/Title/Title';
 import Text from '@vkontakte/vkui/dist/components/Typography/Text/Text';
-
-import LinkButton from '../components/BaseUI/LinkButton';
 
 type MatchesProps = {
   id: string;
@@ -22,6 +32,26 @@ const Matches: React.FC<MatchesProps> = ({
   id,
 }: MatchesProps) => {
   const [fetching] = useState(false);
+  const [user, setUser] = useState(null as User);
+
+  const dispatch = useDispatch();
+
+  const history = useHistory();
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      const user = await bridge.send('VKWebAppGetUserInfo');
+
+      setUser(() => user);
+    };
+
+    fetchUser();
+  }, []);
+
+  const onClick = useCallback(() => {
+    // dispatch(register(user));
+    return history.push('/profile');
+  }, [history]);
 
   return (
     <Route
@@ -59,9 +89,13 @@ const Matches: React.FC<MatchesProps> = ({
               <Group>
                 <FixedLayout vertical="bottom">
                   <Div>
-                    <LinkButton size="xl" to="/profile">
+                    <Button
+                      size="xl"
+                      onClick={onClick}
+                      disabled={user === null}
+                    >
                       Приступить
-                    </LinkButton>
+                    </Button>
                   </Div>
                 </FixedLayout>
               </Group>

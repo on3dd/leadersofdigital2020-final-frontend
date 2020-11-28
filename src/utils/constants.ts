@@ -1,7 +1,6 @@
 import { ModalTypes } from '@test';
 
-export const API_BASE_URL =
-  'https://jsonplaceholder.typicode.com';
+export const API_BASE_URL = 'http://128.199.204.187:8081/';
 
 const API_QUERY = {
   first: `?_limit=100`,
@@ -9,16 +8,13 @@ const API_QUERY = {
 };
 
 export const API_ENDPOINTS = {
-  albums: {
-    index: '/albums' + API_QUERY.first,
-    id: (id: number) =>
-      `/photos/?albumId=${id}` + API_QUERY.second,
-  },
   photos: {
     index: '/photos' + API_QUERY.first,
     id: (id: number) =>
       `/photos/?id=${id}` + API_QUERY.second,
   },
+  register: '/user/register',
+  login: '/user/login',
 };
 
 // For using with min-width media query
