@@ -21,10 +21,15 @@ import Header from '@vkontakte/vkui/dist/components/Header/Header';
 type MatchProps = {
   live?: boolean;
   date?: string;
+  onClick: (to: SyntheticEvent<HTMLElement>) => void;
 };
 
-const Match: React.FC<MatchProps> = ({ live, date }) => (
-  <RichCell>
+const Match: React.FC<MatchProps> = ({
+  live,
+  date,
+  onClick,
+}) => (
+  <RichCell onClick={onClick}>
     <div
       style={{
         display: 'flex',
@@ -73,7 +78,7 @@ const Profile: React.FC = () => {
   const onClick = useCallback(
     (e: SyntheticEvent<HTMLElement>) => {
       console.log('redirecting...');
-      return history.push('/players/1');
+      return history.push('/matches/1');
     },
     [history],
   );
@@ -94,12 +99,15 @@ const Profile: React.FC = () => {
         header={<Header>Текущие матчи</Header>}
       >
         <List>
-          <Match live={true} />
-          <Match date={'28.11, 15:00'} />
-          <Match date={'28.11, 15:30'} />
-          <Match date={'28.11, 16:00'} />
-          <Match date={'28.11, 16:30'} />
-          <Match date={'28.11, 17:00'} />
+          <Match live={true} onClick={onClick} />
+          <Match date={'28.11, 15:00'} onClick={onClick} />
+          <Match date={'28.11, 15:30'} onClick={onClick} />
+          <Match date={'28.11, 16:00'} onClick={onClick} />
+          <Match date={'28.11, 16:30'} onClick={onClick} />
+          <Match date={'28.11, 17:00'} onClick={onClick} />
+          <Match date={'28.11, 17:30'} onClick={onClick} />
+          <Match date={'28.11, 18:00'} onClick={onClick} />
+          <Match date={'28.11, 18:30'} onClick={onClick} />
         </List>
       </Group>
     </Div>

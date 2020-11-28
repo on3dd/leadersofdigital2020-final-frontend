@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { MODAL_TYPES } from '../../../utils/constants';
+// import { MODAL_TYPES } from '../../../utils/constants';
 
 import Group from '@vkontakte/vkui/dist/components/Group/Group';
 import Div from '@vkontakte/vkui/dist/components/Div/Div';
@@ -22,20 +22,19 @@ import {
 } from '@vkontakte/icons';
 
 type Props = {
-  updateActiveModal: (modal: any) => void; // TODO: FIX ANY
+  // updateActiveModal: (modal: any) => void; // TODO: FIX ANY
 };
 
 const achivementStyles = { width: 104, height: 96 };
 
-const Profile: React.FC<Props> = ({
-  updateActiveModal,
-}: Props) => {
+const Profile: React.FC<Props> = ({}: // updateActiveModal,
+Props) => {
   const Achievement = () => (
     <div
       style={{ ...achivementStyles }}
-      onClick={() =>
-        updateActiveModal(MODAL_TYPES.ACHIEVEMENTS)
-      }
+      // onClick={() =>
+      //   updateActiveModal(MODAL_TYPES.ACHIEVEMENTS)
+      // }
     />
   );
 
@@ -94,9 +93,9 @@ const Profile: React.FC<Props> = ({
           asideContent={
             <Text weight="regular">322 место</Text>
           }
-          onClick={() =>
-            updateActiveModal(MODAL_TYPES.STATISTICS)
-          }
+          // onClick={() =>
+          //   updateActiveModal(MODAL_TYPES.STATISTICS)
+          // }
         >
           Статистика
         </Cell>
@@ -107,9 +106,9 @@ const Profile: React.FC<Props> = ({
           asideContent={
             <Text weight="regular">22W/8L</Text>
           }
-          onClick={() =>
-            updateActiveModal(MODAL_TYPES.LAST_GAMES)
-          }
+          // onClick={() =>
+          //   updateActiveModal(MODAL_TYPES.LAST_GAMES)
+          // }
         >
           Последние матчи
         </Cell>
