@@ -6,12 +6,14 @@ import ScreenSpinner from '@vkontakte/vkui/dist/components/ScreenSpinner/ScreenS
 type PanelWrapperProps = {
   id: string;
   fetching: boolean;
+  modal?: JSX.Element;
   children: JSX.Element;
 };
 
 const PanelWrapper: React.FC<PanelWrapperProps> = ({
   id,
   fetching,
+  modal,
   children,
 }: PanelWrapperProps) => {
   const popout = useMemo(() => {
@@ -19,7 +21,7 @@ const PanelWrapper: React.FC<PanelWrapperProps> = ({
   }, [fetching]);
 
   return (
-    <View activePanel={id} popout={popout}>
+    <View activePanel={id} popout={popout} modal={modal}>
       {React.cloneElement(children, { id })}
     </View>
   );

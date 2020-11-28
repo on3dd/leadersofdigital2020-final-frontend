@@ -13,7 +13,10 @@ import Headline from '@vkontakte/vkui/dist/components/Typography/Headline/Headli
 import Text from '@vkontakte/vkui/dist/components/Typography/Text/Text';
 import Header from '@vkontakte/vkui/dist/components/Header/Header';
 
-import { Icon28InfoOutline } from '@vkontakte/icons';
+import {
+  Icon28InfoOutline,
+  Icon28ListOutline,
+} from '@vkontakte/icons';
 
 const Profile: React.FC = () => (
   <Div>
@@ -52,9 +55,19 @@ const Profile: React.FC = () => (
     <Group title="Stats" separator="hide">
       <Cell
         before={<Icon28InfoOutline />}
-        asideContent={<Text weight="regular">22W/8L</Text>}
+        asideContent={
+          <Text weight="regular">322 место</Text>
+        }
       >
         Статистика
+      </Cell>
+    </Group>
+    <Group title="Last games" separator="hide">
+      <Cell
+        before={<Icon28ListOutline />}
+        asideContent={<Text weight="regular">22W/8L</Text>}
+      >
+        Последние матчи
       </Cell>
     </Group>
     <Group
