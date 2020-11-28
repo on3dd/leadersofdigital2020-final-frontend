@@ -26,6 +26,12 @@ declare module '@test' {
     thumbnailUrl: string;
   }
 
+  export interface ModalTypes {
+    STATISTICS: 'STATISTICS';
+    LAST_GAMES: 'LAST_GAMES';
+    ACHIEVEMENTS: 'ACHIEVEMENTS';
+  }
+
   export interface State<T> {
     data: T;
     isFetching: boolean;

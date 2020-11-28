@@ -1,3 +1,5 @@
+import { ModalTypes } from '@test';
+
 export const API_BASE_URL =
   'https://jsonplaceholder.typicode.com';
 
@@ -25,4 +27,16 @@ export const BREAKPOINTS = {
   tablet: '768px',
   laptop: '1366px',
   desktop: '1680px',
+};
+
+export const MODAL_TYPES: ModalTypes = {
+  STATISTICS: 'STATISTICS',
+  LAST_GAMES: 'LAST_GAMES',
+  ACHIEVEMENTS: 'ACHIEVEMENTS',
+};
+
+export const MODAL_TITLES = {
+  STATISTICS: 'Статистика',
+  LAST_GAMES: 'Предыдущие матчи',
+  ACHIEVEMENTS: 'Достижения',
 };
