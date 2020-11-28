@@ -42,6 +42,7 @@ const Profile: React.FC = () => (
     </Group>
     <Group title="Team" separator="hide">
       <SimpleCell
+        description="Мид"
         before={
           <Avatar
             size={48}

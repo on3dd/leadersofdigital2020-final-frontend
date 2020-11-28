@@ -1,9 +1,11 @@
 import React, {
   ChangeEvent,
+  SyntheticEvent,
   useState,
   useMemo,
   useCallback,
 } from 'react';
+import { useHistory } from 'react-router-dom';
 
 import Group from '@vkontakte/vkui/dist/components/Group/Group';
 import Div from '@vkontakte/vkui/dist/components/Div/Div';
@@ -44,10 +46,23 @@ const data = [
 const Profile: React.FC = () => {
   const [search, setSearch] = useState('');
 
-  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const value = e?.target?.value || '';
-    return setSearch(() => value);
-  };
+  const history = useHistory();
+
+  const onChange = useCallback(
+    (e: ChangeEvent<HTMLInputElement>) => {
+      const value = e?.target?.value || '';
+      return setSearch(() => value);
+    },
+    [setSearch],
+  );
+
+  const onClick = useCallback(
+    (e: SyntheticEvent<HTMLElement>) => {
+      console.log('redirecting...');
+      return history.push('/teams/1');
+    },
+    [history],
+  );
 
   const thematics = useMemo(() => {
     const str = search.toLowerCase();
@@ -64,31 +79,15 @@ const Profile: React.FC = () => {
         header={<Header>Моя команда</Header>}
       >
         <RichCell
-          // size="l"
+          text="1 место"
+          caption="Владивосток, Россия"
           before={
             <Avatar
               size={72}
               src="https://upload.wikimedia.org/wikipedia/ru/thumb/4/4f/Virtus.proLogo.png/1200px-Virtus.proLogo.png"
             />
           }
-          // description={
-          //   <Headline weight="regular">
-          //     Владивосток, Россия
-          //   </Headline>
-          // }
-          text="1 место"
-          caption="Владивосток, Россия"
-          // bottomContent={
-          //   <div style={{ display: 'flex' }}>
-          //     <LinkButton
-          //       to="/teams/1"
-          //       size="m"
-          //       mode="primary"
-          //     >
-          //       Подробнее
-          //     </LinkButton>
-          //   </div>
-          // }
+          onClick={onClick}
         >
           <Title weight="bold" level="3">
             Virtus.Pro
@@ -107,15 +106,15 @@ const Profile: React.FC = () => {
             {thematics.map((item, idx) => (
               <RichCell
                 key={item.id}
+                caption="Хабаровск, Россия"
+                text={`${idx + 2} место`}
                 before={
                   <Avatar
                     size={48}
                     src="https://upload.wikimedia.org/wikipedia/ru/2/2c/NAVI_logo.png"
                   />
                 }
-                caption="Хабаровск, Россия"
-                text={`${idx + 2} место`}
-                // after="+ 1 500 ₽"
+                onClick={onClick}
               >
                 {item.name}
               </RichCell>
