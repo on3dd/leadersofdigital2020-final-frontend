@@ -6,6 +6,8 @@ import PanelWrapper from '../utils/wrappers/PanelWrapper';
 import Panel from '@vkontakte/vkui/dist/components/Panel/Panel';
 import PanelHeader from '@vkontakte/vkui/dist/components/PanelHeader/PanelHeader';
 
+import RanksComponent from '../components/ranks';
+
 type RanksProps = {
   id: string;
 };
@@ -22,8 +24,8 @@ const Ranks: React.FC<RanksProps> = ({
       component={() => (
         <PanelWrapper id={id} fetching={fetching}>
           <Panel id={id}>
-            <PanelHeader>Ranks</PanelHeader>
-            {/* <RanksComponent data={user} /> */}
+            <PanelHeader>Рейтинг</PanelHeader>
+            <RanksComponent />
           </Panel>
         </PanelWrapper>
       )}
