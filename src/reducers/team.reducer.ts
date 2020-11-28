@@ -1,38 +1,39 @@
 import {
-  FETCHING_PHOTO,
-  FETCHING_PHOTO_SUCCESS,
-  FETCHING_PHOTO_FAIL,
+  FETCHING_TEAM,
+  FETCHING_TEAM_SUCCESS,
+  FETCHING_TEAM_FAIL,
 } from '../utils/actionTypes';
 
-import { AsyncAction, PhotoState } from '@test';
+import { AsyncAction, TeamState } from '@test';
 
-const initialState: PhotoState = {
+const initialState: TeamState = {
   data: {
     id: 0,
-    albumId: 0,
-    title: '',
-    url: '',
-    thumbnailUrl: '',
+    title: 'Неопознанная команда',
+    tag: 'NONAME',
+    photo_100: '',
+    photo_200: '',
+    photo_max_orig: '',
+    rating: 0,
   },
   isFetching: false,
   hasError: false,
   errorMessage: null,
 };
 
-const photoReducer = (
+const teamReducer = (
   state = initialState,
   action: AsyncAction,
 ) => {
   switch (action.type) {
-    case FETCHING_PHOTO:
+    case FETCHING_TEAM:
       return Object.assign({}, state, {
-        data: [],
         isFetching: true,
         hasError: false,
         errorMessage: null,
       });
 
-    case FETCHING_PHOTO_SUCCESS:
+    case FETCHING_TEAM_SUCCESS:
       return Object.assign({}, state, {
         data: action.payload,
         isFetching: false,
@@ -40,7 +41,7 @@ const photoReducer = (
         errorMessage: null,
       });
 
-    case FETCHING_PHOTO_FAIL:
+    case FETCHING_TEAM_FAIL:
       return Object.assign({}, state, {
         isFetching: false,
         hasError: true,
@@ -52,4 +53,4 @@ const photoReducer = (
   }
 };
 
-export default photoReducer;
+export default teamReducer;

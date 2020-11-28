@@ -1,13 +1,13 @@
 import { Dispatch } from 'redux';
 
-import { Team } from '@test';
+import { Player } from '@test';
 
 import axiosService from '../utils/axiosService';
 
 import {
-  FETCHING_TEAMS,
-  FETCHING_TEAMS_SUCCESS,
-  FETCHING_TEAMS_FAIL,
+  FETCHING_PLAYER,
+  FETCHING_PLAYER_SUCCESS,
+  FETCHING_PLAYER_FAIL,
 } from '../utils/actionTypes';
 
 import { API_ENDPOINTS } from '../utils/constants';
@@ -51,14 +51,14 @@ const data = [
   },
 }));
 
-const fetchTeams = () => {
+const fetchPlayer = (id: number) => {
   return async (dispatch: Dispatch) => {
-    dispatch({ type: FETCHING_TEAMS });
+    dispatch({ type: FETCHING_PLAYER });
 
     return sleep(500).then(() => {
       return dispatch({
-        type: FETCHING_TEAMS_SUCCESS,
-        payload: data,
+        type: FETCHING_PLAYER_SUCCESS,
+        payload: data.find((el) => el.id === id),
       });
     });
 
@@ -66,17 +66,17 @@ const fetchTeams = () => {
     //   .get(API_ENDPOINTS.photos.id(id))
     //   .then((res) => {
     //     dispatch({
-    //       type: FETCHING_TEAMS_SUCCESS,
+    //       type: FETCHING_PLAYER_SUCCESS,
     //       payload: res.data,
     //     });
     //   })
     //   .catch((err) => {
     //     dispatch({
-    //       type: FETCHING_TEAMS_FAIL,
+    //       type: FETCHING_PLAYER_FAIL,
     //       payload: err,
     //     });
     //   });
   };
 };
 
-export default fetchTeams;
+export default fetchPlayer;

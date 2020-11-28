@@ -5,9 +5,9 @@ import { Team } from '@test';
 import axiosService from '../utils/axiosService';
 
 import {
-  FETCHING_TEAMS,
-  FETCHING_TEAMS_SUCCESS,
-  FETCHING_TEAMS_FAIL,
+  FETCHING_TEAM,
+  FETCHING_TEAM_SUCCESS,
+  FETCHING_TEAM_FAIL,
 } from '../utils/actionTypes';
 
 import { API_ENDPOINTS } from '../utils/constants';
@@ -51,14 +51,14 @@ const data = [
   },
 }));
 
-const fetchTeams = () => {
+const fetchTeam = (id: number) => {
   return async (dispatch: Dispatch) => {
-    dispatch({ type: FETCHING_TEAMS });
+    dispatch({ type: FETCHING_TEAM });
 
     return sleep(500).then(() => {
       return dispatch({
-        type: FETCHING_TEAMS_SUCCESS,
-        payload: data,
+        type: FETCHING_TEAM_SUCCESS,
+        payload: data.find((el) => el.id === id),
       });
     });
 
@@ -66,17 +66,17 @@ const fetchTeams = () => {
     //   .get(API_ENDPOINTS.photos.id(id))
     //   .then((res) => {
     //     dispatch({
-    //       type: FETCHING_TEAMS_SUCCESS,
+    //       type: FETCHING_TEAM_SUCCESS,
     //       payload: res.data,
     //     });
     //   })
     //   .catch((err) => {
     //     dispatch({
-    //       type: FETCHING_TEAMS_FAIL,
+    //       type: FETCHING_TEAM_FAIL,
     //       payload: err,
     //     });
     //   });
   };
 };
 
-export default fetchTeams;
+export default fetchTeam;

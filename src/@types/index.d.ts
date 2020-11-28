@@ -18,14 +18,6 @@ declare module '@test' {
   export type User = UserInfo | null;
   export type Popout = React.ReactNode;
 
-  export interface Photo {
-    id: number;
-    albumId: number;
-    title: string;
-    url: string;
-    thumbnailUrl: string;
-  }
-
   export interface Profile extends UserInfo {
     team_id: number;
     steam_id: number;
@@ -65,17 +57,17 @@ declare module '@test' {
     errorMessage: null | string;
   }
 
-  export interface PhotosState extends State<Photo[]> {}
-  export interface PhotoState extends State<Photo> {}
   export interface ProfileState extends State<Profile> {}
+  export interface TeamState extends State<Team> {}
   export interface TeamsState extends State<Team[]> {}
+  export interface PlayerState extends State<Player> {}
   export interface PlayersState extends State<Player[]> {}
 
   export interface RootState {
-    photos: PhotosState;
-    photo: PhotoState;
     profile: ProfileState;
+    team: TeamState;
     teams: TeamsState;
+    player: PlayerState;
     players: PlayersState;
   }
 }
