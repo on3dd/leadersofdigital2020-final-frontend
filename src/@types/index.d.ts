@@ -33,6 +33,8 @@ declare module '@test' {
     LAST_GAMES: 'LAST_GAMES';
     ACHIEVEMENTS: 'ACHIEVEMENTS';
     MATCH_SCHEDULE: 'MATCH_SCHEDULE';
+    CREATE_MATCH: 'CREATE_MATCH';
+    INSPECT_MATCH: 'INSPECT_MATCH';
   }
 
   export interface State<T> {

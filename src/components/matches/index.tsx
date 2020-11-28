@@ -1,5 +1,4 @@
 import React, {
-  ChangeEvent,
   SyntheticEvent,
   useState,
   useMemo,
@@ -17,6 +16,11 @@ import Button from '@vkontakte/vkui/dist/components/Button/Button';
 import Headline from '@vkontakte/vkui/dist/components/Typography/Headline/Headline';
 import Text from '@vkontakte/vkui/dist/components/Typography/Text/Text';
 import Header from '@vkontakte/vkui/dist/components/Header/Header';
+import { MODAL_TYPES } from 'utils/constants';
+
+type Props = {
+  updateActiveModal: (modal: any) => void; // TODO: FIX ANY
+};
 
 type MatchProps = {
   live?: boolean;
@@ -72,15 +76,14 @@ const Match: React.FC<MatchProps> = ({
   </RichCell>
 );
 
-const Profile: React.FC = () => {
-  const history = useHistory();
-
+const Profile: React.FC<Props> = ({
+  updateActiveModal,
+}: Props) => {
   const onClick = useCallback(
     (e: SyntheticEvent<HTMLElement>) => {
-      console.log('redirecting...');
-      return history.push('/matches/1');
+      updateActiveModal(MODAL_TYPES.INSPECT_MATCH);
     },
-    [history],
+    [updateActiveModal],
   );
 
   return (
@@ -90,6 +93,9 @@ const Profile: React.FC = () => {
           stretched
           size="xl"
           style={{ marginTop: 0 }}
+          onClick={() =>
+            updateActiveModal(MODAL_TYPES.CREATE_MATCH)
+          }
         >
           Создать матч
         </Button>

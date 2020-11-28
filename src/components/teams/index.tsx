@@ -13,6 +13,7 @@ import Avatar from '@vkontakte/vkui/dist/components/Avatar/Avatar';
 import List from '@vkontakte/vkui/dist/components/List/List';
 import RichCell from '@vkontakte/vkui/dist/components/RichCell/RichCell';
 import Search from '@vkontakte/vkui/dist/components/Search/Search';
+import Button from '@vkontakte/vkui/dist/components/Button/Button';
 
 import Title from '@vkontakte/vkui/dist/components/Typography/Title/Title';
 import Header from '@vkontakte/vkui/dist/components/Header/Header';
@@ -106,15 +107,26 @@ const Profile: React.FC = () => {
             {thematics.map((item, idx) => (
               <RichCell
                 key={item.id}
+                disabled
+                multiline
                 caption="Хабаровск, Россия"
                 text={`${idx + 2} место`}
                 before={
                   <Avatar
-                    size={48}
+                    size={72}
                     src="https://upload.wikimedia.org/wikipedia/ru/2/2c/NAVI_logo.png"
                   />
                 }
-                onClick={onClick}
+                actions={
+                  <React.Fragment>
+                    <Button size="m" onClick={onClick}>
+                      Подробнее
+                    </Button>
+                    <Button size="m" mode="secondary">
+                      Вызов
+                    </Button>
+                  </React.Fragment>
+                }
               >
                 {item.name}
               </RichCell>

@@ -34,6 +34,8 @@ export const MODAL_TYPES: ModalTypes = {
   LAST_GAMES: 'LAST_GAMES',
   ACHIEVEMENTS: 'ACHIEVEMENTS',
   MATCH_SCHEDULE: 'MATCH_SCHEDULE',
+  CREATE_MATCH: 'CREATE_MATCH',
+  INSPECT_MATCH: 'INSPECT_MATCH',
 };
 
 export const MODAL_TITLES = {
@@ -41,4 +43,6 @@ export const MODAL_TITLES = {
   LAST_GAMES: 'Предыдущие матчи',
   ACHIEVEMENTS: 'Достижения',
   MATCH_SCHEDULE: 'Расписание матчей',
+  CREATE_MATCH: 'Создание матча',
+  INSPECT_MATCH: 'Посмотреть матч',
 };
