@@ -19,8 +19,6 @@ import ModalRoot from '@vkontakte/vkui/dist/components/ModalRoot/ModalRoot';
 import ModalPage from '@vkontakte/vkui/dist/components/ModalPage/ModalPage';
 import ModalPageHeader from '@vkontakte/vkui/dist/components/ModalPageHeader/ModalPageHeader';
 
-import Title from '@vkontakte/vkui/dist/components/Typography/Title/Title';
-
 import { Icon24Done, Icon24Cancel } from '@vkontakte/icons';
 
 // import PanelHeaderWithButton from '../components/BaseUI/PanelHeaderWithButton';
@@ -34,7 +32,7 @@ const Profile: React.FC<ProfileProps> = ({
   id,
 }: ProfileProps) => {
   const [fetching] = useState(false);
-  const [activeModal, setActiveModal] = useState(null);
+  const [activeModal] = useState(null);
 
   const modalClose = useCallback(() => {
     return console.log('closing modal:', activeModal);
@@ -82,7 +80,7 @@ const Profile: React.FC<ProfileProps> = ({
         </ModalPage>
       </ModalRoot>
     ),
-    [activeModal, modalBack],
+    [activeModal, modalClose, modalBack],
   );
 
   return (

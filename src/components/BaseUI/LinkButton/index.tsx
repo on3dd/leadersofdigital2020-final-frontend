@@ -7,17 +7,23 @@ import Button, {
 
 interface LinkButtonProps extends ButtonProps {
   to: string;
+  size?: 'm' | 'l' | 'xl';
   children: React.ReactNode;
 }
 
 const LinkButton: React.FC<LinkButtonProps> = ({
   to,
+  size = 'm',
   mode = 'primary',
+  style,
   children,
 }: LinkButtonProps) => {
   return (
-    <Link to={to} style={{ textDecoration: 'none' }}>
-      <Button size="xl" mode={mode}>
+    <Link
+      to={to}
+      style={{ textDecoration: 'none', ...style }}
+    >
+      <Button size="m" mode={mode}>
         {children}
       </Button>
     </Link>

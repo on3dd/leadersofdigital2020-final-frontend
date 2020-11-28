@@ -22,13 +22,13 @@ const Profile: React.FC = () => (
   <Div>
     <Group title="Info" separator="hide">
       <Cell
+        size="l"
         before={
           <Avatar
             size={72}
             src="https://ggscore.com/media/logo/p2888.png"
           />
         }
-        size="l"
         description={
           <Headline weight="regular">
             Владивосток, Россия
