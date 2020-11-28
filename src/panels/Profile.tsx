@@ -1,11 +1,15 @@
 import React, {
   useState,
+  useEffect,
   useMemo,
   useCallback,
 } from 'react';
+import { useDispatch } from 'react-redux';
 import { Route } from 'react-router-dom';
 
 import { Modal } from '@test';
+
+import fetchProfile from '../actions/fetchProfile';
 
 import PanelWrapper from '../utils/wrappers/PanelWrapper';
 import {
@@ -40,13 +44,29 @@ type ProfileProps = {
 const Profile: React.FC<ProfileProps> = ({
   id,
 }: ProfileProps) => {
-  const [fetching] = useState(false);
+  const [fetching, setFetching] = useState(true);
   const [activeModal, setActiveModal] = useState(
     null as Modal,
   );
   const [modalHistory, setModalHistory] = useState(
     [] as string[],
   );
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      console.log('user fetching...');
+
+      await dispatch(fetchProfile());
+
+      console.log('user fetched');
+
+      setFetching(false);
+    };
+
+    fetchData();
+  }, []);
 
   const updateActiveModal = useCallback(
     (activeModal: Modal = null) => {
@@ -158,6 +178,7 @@ const Profile: React.FC<ProfileProps> = ({
           <Panel id={id}>
             <PanelHeader>Профиль</PanelHeader>
             <ProfileComponent
+              // data={user}
               updateActiveModal={updateActiveModal}
             />
           </Panel>

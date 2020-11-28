@@ -26,6 +26,11 @@ declare module '@test' {
     thumbnailUrl: string;
   }
 
+  export interface Profile extends UserInfo {
+    team_id: number;
+    steam_id: number;
+  }
+
   export type Modal = string | null;
 
   export interface ModalTypes {
@@ -46,9 +51,11 @@ declare module '@test' {
 
   export interface PhotosState extends State<Photo[]> {}
   export interface PhotoState extends State<Photo> {}
+  export interface ProfileState extends State<Profile> {}
 
   export interface RootState {
     photos: PhotosState;
     photo: PhotoState;
+    profile: ProfileState;
   }
 }

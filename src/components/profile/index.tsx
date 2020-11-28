@@ -1,4 +1,7 @@
-import React from 'react';
+import React, { useMemo } from 'react';
+import { useSelector } from 'react-redux';
+
+import { User, RootState } from '@test';
 
 import { MODAL_TYPES } from '../../utils/constants';
 
@@ -21,6 +24,7 @@ import {
 } from '@vkontakte/icons';
 
 type Props = {
+  // data: User;
   updateActiveModal: (modal: any) => void; // TODO: FIX ANY
 };
 
@@ -33,8 +37,13 @@ const achivementStyles = {
 };
 
 const Profile: React.FC<Props> = ({
+  // data,
   updateActiveModal,
 }: Props) => {
+  const data = useSelector(
+    (state: RootState) => state.profile.data,
+  );
+
   const Achievement = () => (
     <div
       style={{ ...achivementStyles }}
@@ -50,46 +59,67 @@ const Profile: React.FC<Props> = ({
     </div>
   );
 
+  const name = useMemo(() => {
+    const firstName = data?.first_name || '';
+    const lastName = data?.last_name || '';
+    return firstName && lastName
+      ? `${firstName} ${lastName}`
+      : 'Неопознанный Пользователь';
+  }, [data?.first_name, data?.last_name]);
+
+  const location = useMemo(() => {
+    const city = (data && data?.city.title) || '';
+    const country = (data && data?.country.title) || '';
+    return city && country
+      ? `${city}, ${country}`
+      : 'Неизвестно';
+  }, [data?.city, data?.country]);
+
   return (
     <Div>
       <Group title="Info" separator="hide">
         <Cell
           size="l"
           before={
-            <Avatar
-              size={72}
-              src="https://ggscore.com/media/logo/p2888.png"
-            />
+            <Avatar size={72} src={data?.photo_100} />
           }
           description={
-            <Headline weight="regular">
-              Владивосток, Россия
-            </Headline>
+            <Headline weight="regular">{location}</Headline>
           }
         >
           <Title weight="bold" level="3">
-            Роман Кушнарев
+            {name}
           </Title>
         </Cell>
       </Group>
       <Group title="Team" separator="hide">
         <SimpleCell
-          description="Мид"
+          disabled={!data.team_id}
+          description={!!data.team_id && 'Мид'}
           before={
             <Avatar
               size={48}
-              src="https://upload.wikimedia.org/wikipedia/ru/thumb/4/4f/Virtus.proLogo.png/1200px-Virtus.proLogo.png"
+              src={
+                !!data.team_id
+                  ? 'https://upload.wikimedia.org/wikipedia/ru/thumb/4/4f/Virtus.proLogo.png/1200px-Virtus.proLogo.png'
+                  : ''
+              }
             />
           }
         >
-          Virtus.Pro
+          {!!data.team_id
+            ? 'Virtus.Pro'
+            : 'Вы не состоите в команде'}
         </SimpleCell>
       </Group>
       <Group title="Stats" separator="hide">
         <Cell
+          disabled={!data.team_id}
           before={<Icon28InfoOutline />}
           asideContent={
-            <Text weight="regular">322 место</Text>
+            <Text weight="regular">
+              {!!data.team_id && '322 место'}
+            </Text>
           }
           onClick={() =>
             updateActiveModal(MODAL_TYPES.STATISTICS)
@@ -100,9 +130,12 @@ const Profile: React.FC<Props> = ({
       </Group>
       <Group title="Last games" separator="hide">
         <Cell
+          disabled={!data.team_id}
           before={<Icon28ListOutline />}
           asideContent={
-            <Text weight="regular">22W/8L</Text>
+            <Text weight="regular">
+              {!!data.team_id && '22W/8L'}
+            </Text>
           }
           onClick={() =>
             updateActiveModal(MODAL_TYPES.LAST_GAMES)
