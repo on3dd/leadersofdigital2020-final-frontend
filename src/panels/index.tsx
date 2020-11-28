@@ -18,6 +18,7 @@ import {
   Icon28UserCircleOutline,
 } from '@vkontakte/icons';
 
+import OnboardingPanel from './Onboarding';
 import ProfilePanel from './Profile';
 import TeamsPanel from './Teams';
 import PlayersPanel from './Players';
@@ -44,7 +45,9 @@ const Index: React.FC = () => {
     [history],
   );
 
-  return (
+  return pathname === '/' ? (
+    <OnboardingPanel id="/" />
+  ) : (
     <Epic
       activeStory={activeStory}
       tabbar={

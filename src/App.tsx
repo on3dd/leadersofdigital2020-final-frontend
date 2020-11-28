@@ -39,12 +39,6 @@ const App: React.FC = () => {
   return (
     <StoreProvider>
       <BrowserRouter>
-        <Route
-          path="/"
-          exact
-          render={() => <Redirect to="/profile" />}
-        />
-
         <Main>
           <Index />
         </Main>

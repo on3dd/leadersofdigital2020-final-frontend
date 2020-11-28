@@ -23,7 +23,7 @@ const LinkButton: React.FC<LinkButtonProps> = ({
       to={to}
       style={{ textDecoration: 'none', ...style }}
     >
-      <Button size="m" mode={mode}>
+      <Button size={size} mode={mode}>
         {children}
       </Button>
     </Link>
