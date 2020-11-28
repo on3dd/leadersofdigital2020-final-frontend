@@ -6,6 +6,8 @@ import PanelWrapper from '../utils/wrappers/PanelWrapper';
 import Panel from '@vkontakte/vkui/dist/components/Panel/Panel';
 import PanelHeader from '@vkontakte/vkui/dist/components/PanelHeader/PanelHeader';
 
+import MatchesComponent from '../components/matches';
+
 type MatchesProps = {
   id: string;
 };
@@ -22,8 +24,8 @@ const Matches: React.FC<MatchesProps> = ({
       component={() => (
         <PanelWrapper id={id} fetching={fetching}>
           <Panel id={id}>
-            <PanelHeader>Matches</PanelHeader>
-            {/* <MatchesComponent data={user} /> */}
+            <PanelHeader>Матчи</PanelHeader>
+            <MatchesComponent />
           </Panel>
         </PanelWrapper>
       )}
