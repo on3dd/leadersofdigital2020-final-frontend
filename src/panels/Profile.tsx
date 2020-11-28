@@ -93,9 +93,6 @@ const Profile: React.FC<ProfileProps> = ({
           modal={modal}
         >
           <Panel id={id}>
-            {/* <PanelHeaderWithButton to="/profile">
-              Profile Item
-            </PanelHeaderWithButton> */}
             <PanelHeader>Профиль</PanelHeader>
             <ProfileComponent />
           </Panel>

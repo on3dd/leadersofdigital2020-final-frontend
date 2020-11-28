@@ -98,11 +98,11 @@ const Profile: React.FC = () => {
                 }
                 actions={
                   <React.Fragment>
-                    <Button onClick={onClick}>
-                      Принять
+                    <Button size="m" onClick={onClick}>
+                      Подробнее
                     </Button>
-                    <Button mode="secondary">
-                      Отклонить
+                    <Button size="m" mode="secondary">
+                      Скрыть
                     </Button>
                   </React.Fragment>
                 }
