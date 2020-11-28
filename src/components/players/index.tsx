@@ -5,7 +5,10 @@ import React, {
   useMemo,
   useCallback,
 } from 'react';
+import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+
+import { RootState } from '@test';
 
 import Group from '@vkontakte/vkui/dist/components/Group/Group';
 import Div from '@vkontakte/vkui/dist/components/Div/Div';
@@ -46,6 +49,10 @@ const data = [
 const Profile: React.FC = () => {
   const [search, setSearch] = useState('');
 
+  const data = useSelector(
+    (state: RootState) => state.players.data,
+  );
+
   const history = useHistory();
 
   const onChange = useCallback(
@@ -67,7 +74,10 @@ const Profile: React.FC = () => {
   const thematics = useMemo(() => {
     const str = search.toLowerCase();
     return data.filter(
-      ({ name }) => name.toLowerCase().indexOf(str) > -1,
+      ({ first_name, last_name }) =>
+        `${first_name} ${last_name}`
+          .toLowerCase()
+          .indexOf(str) > -1,
     );
   }, [search]);
 
@@ -106,7 +116,9 @@ const Profile: React.FC = () => {
                   </React.Fragment>
                 }
               >
-                {item.name}
+                {
+                  (item as any).name // TODO: FiX ANY AND NAME
+                }
               </RichCell>
             ))}
           </List>

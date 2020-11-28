@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 
-import { User, RootState } from '@test';
+import { RootState } from '@test';
 
 import { MODAL_TYPES } from '../../utils/constants';
 

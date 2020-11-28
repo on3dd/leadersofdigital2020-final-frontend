@@ -31,6 +31,22 @@ declare module '@test' {
     steam_id: number;
   }
 
+  export interface Team {
+    id: number;
+    title: string;
+    tag: string;
+    photo_100: string;
+    photo_200: string;
+    photo_max_orig: string;
+    rating: number;
+    match_id?: number;
+  }
+
+  export interface Player extends UserInfo {
+    team_id: number;
+    steam_id: number;
+  }
+
   export type Modal = string | null;
 
   export interface ModalTypes {
@@ -52,10 +68,14 @@ declare module '@test' {
   export interface PhotosState extends State<Photo[]> {}
   export interface PhotoState extends State<Photo> {}
   export interface ProfileState extends State<Profile> {}
+  export interface TeamsState extends State<Team[]> {}
+  export interface PlayersState extends State<Player[]> {}
 
   export interface RootState {
     photos: PhotosState;
     photo: PhotoState;
     profile: ProfileState;
+    teams: TeamsState;
+    players: PlayersState;
   }
 }

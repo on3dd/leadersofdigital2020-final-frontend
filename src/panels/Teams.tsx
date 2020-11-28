@@ -1,11 +1,15 @@
 import React, {
   useState,
+  useEffect,
   useMemo,
   useCallback,
 } from 'react';
+import { useDispatch } from 'react-redux';
 import { Route } from 'react-router-dom';
 
 import { Modal } from '@test';
+
+import fetchTeams from '../actions/fetchTeams';
 
 import PanelWrapper from '../utils/wrappers/PanelWrapper';
 import {
@@ -39,13 +43,29 @@ type TeamsProps = {
 const Teams: React.FC<TeamsProps> = ({
   id,
 }: TeamsProps) => {
-  const [fetching] = useState(false);
+  const [fetching, setFetching] = useState(true);
   const [activeModal, setActiveModal] = useState(
     null as Modal,
   );
   const [modalHistory, setModalHistory] = useState(
     [] as string[],
   );
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      console.log('user fetching...');
+
+      await dispatch(fetchTeams());
+
+      console.log('user fetched');
+
+      setFetching(false);
+    };
+
+    fetchData();
+  }, []);
 
   const updateActiveModal = useCallback(
     (activeModal: Modal = null) => {
