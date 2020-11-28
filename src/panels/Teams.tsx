@@ -33,6 +33,7 @@ const Teams: React.FC<TeamsProps> = ({
           </PanelWrapper>
         )}
       />
+
       <Route
         path="/teams/:id"
         exact

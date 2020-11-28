@@ -65,7 +65,7 @@ const NewsItem: React.FC = () => (
     >
       <HorizontalScroll>
         <div style={{ display: 'flex' }}>
-          <div style={{ ...itemStyle, paddingLeft: 4 }}>
+          <div style={{ ...itemStyle, padding: '0 4px' }}>
             <Avatar size={64} style={{ marginBottom: 8 }}>
               <Icon24User />
             </Avatar>

@@ -6,6 +6,10 @@ import PanelWrapper from '../utils/wrappers/PanelWrapper';
 import Panel from '@vkontakte/vkui/dist/components/Panel/Panel';
 import PanelHeader from '@vkontakte/vkui/dist/components/PanelHeader/PanelHeader';
 
+import PanelHeaderWithButton from '../components/BaseUI/PanelHeaderWithButton';
+import PlayersComponent from '../components/players';
+import PlayersItemComponent from '../components/players/id';
+
 type PlayersProps = {
   id: string;
 };
@@ -16,18 +20,35 @@ const Players: React.FC<PlayersProps> = ({
   const [fetching] = useState(false);
 
   return (
-    <Route
-      path="/players"
-      exact
-      component={() => (
-        <PanelWrapper id={id} fetching={fetching}>
-          <Panel id={id}>
-            <PanelHeader>Players</PanelHeader>
-            {/* <PlayersComponent data={user} /> */}
-          </Panel>
-        </PanelWrapper>
-      )}
-    />
+    <>
+      <Route
+        path="/players"
+        exact
+        component={() => (
+          <PanelWrapper id={id} fetching={fetching}>
+            <Panel id={id}>
+              <PanelHeader>Игроки</PanelHeader>
+              <PlayersComponent />
+            </Panel>
+          </PanelWrapper>
+        )}
+      />
+
+      <Route
+        path="/players/:id"
+        exact
+        component={() => (
+          <PanelWrapper id={id} fetching={fetching}>
+            <Panel id={id}>
+              <PanelHeaderWithButton to="/players">
+                Команда
+              </PanelHeaderWithButton>
+              <PlayersItemComponent />
+            </Panel>
+          </PanelWrapper>
+        )}
+      />
+    </>
   );
 };
 
