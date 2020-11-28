@@ -23,8 +23,10 @@ import PanelHeader from '@vkontakte/vkui/dist/components/PanelHeader/PanelHeader
 import PanelHeaderButton from '@vkontakte/vkui/dist/components/PanelHeaderButton/PanelHeaderButton';
 import ModalRoot from '@vkontakte/vkui/dist/components/ModalRoot/ModalRoot';
 import ModalPage from '@vkontakte/vkui/dist/components/ModalPage/ModalPage';
+import ModalCard from '@vkontakte/vkui/dist/components/ModalCard/ModalCard';
 import ModalPageHeader from '@vkontakte/vkui/dist/components/ModalPageHeader/ModalPageHeader';
 import Div from '@vkontakte/vkui/dist/components/Div/Div';
+import Avatar from '@vkontakte/vkui/dist/components/Avatar/Avatar';
 
 import { Icon24Done, Icon24Cancel } from '@vkontakte/icons';
 
@@ -76,9 +78,10 @@ const Profile: React.FC<ProfileProps> = ({
   }, [modalHistory]);
 
   const header = useCallback(
-    (title: string = '') => (
+    (title: string = '', card?: boolean) => (
       <ModalPageHeader
         left={
+          !card &&
           IS_PLATFORM_ANDROID && (
             <PanelHeaderButton onClick={modalBack}>
               <Icon24Cancel />
@@ -86,9 +89,11 @@ const Profile: React.FC<ProfileProps> = ({
           )
         }
         right={
-          <PanelHeaderButton onClick={modalBack}>
-            {IS_PLATFORM_IOS ? 'Готово' : <Icon24Done />}
-          </PanelHeaderButton>
+          !card && (
+            <PanelHeaderButton onClick={modalBack}>
+              {IS_PLATFORM_IOS ? 'Готово' : <Icon24Done />}
+            </PanelHeaderButton>
+          )
         }
       >
         {title}
@@ -109,6 +114,7 @@ const Profile: React.FC<ProfileProps> = ({
         >
           <Div>...</Div>
         </ModalPage>
+
         <ModalPage
           id={MODAL_TYPES.LAST_GAMES}
           header={header(MODAL_TITLES.LAST_GAMES)}
@@ -116,12 +122,25 @@ const Profile: React.FC<ProfileProps> = ({
           <Div>...</Div>
         </ModalPage>
 
-        <ModalPage
+        <ModalCard
           id={MODAL_TYPES.ACHIEVEMENTS}
-          header={header(MODAL_TITLES.ACHIEVEMENTS)}
-        >
-          <Div>...</Div>
-        </ModalPage>
+          header={header(MODAL_TITLES.ACHIEVEMENTS, true)}
+          caption="Номер карты получателя не нужен — он сам решит, куда зачислить средства."
+          icon={
+            <Avatar
+              size={72}
+              src="https://cdn.dota2.com/apps/dota2/images/heroes/pudge_vert.jpg?v=5027641"
+            />
+          }
+          onClose={modalClose}
+          actions={[
+            {
+              title: 'Поделиться',
+              mode: 'primary',
+              action: modalClose,
+            },
+          ]}
+        />
       </ModalRoot>
     ),
     [activeModal],

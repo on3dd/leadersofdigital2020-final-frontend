@@ -24,7 +24,13 @@ type Props = {
   updateActiveModal: (modal: any) => void; // TODO: FIX ANY
 };
 
-const achivementStyles = { width: 104, height: 96 };
+const achivementStyles = {
+  height: 96,
+  width: 104,
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+};
 
 const Profile: React.FC<Props> = ({
   updateActiveModal,
@@ -35,7 +41,13 @@ const Profile: React.FC<Props> = ({
       onClick={() =>
         updateActiveModal(MODAL_TYPES.ACHIEVEMENTS)
       }
-    />
+    >
+      <Avatar
+        size={80}
+        mode="image"
+        src="https://cdn.dota2.com/apps/dota2/images/heroes/pudge_vert.jpg?v=5027641"
+      />
+    </div>
   );
 
   return (
