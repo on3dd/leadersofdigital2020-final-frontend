@@ -26,7 +26,7 @@ const fetchProfile = () => {
 
         return dispatch({
           type: FETCHING_PROFILE_SUCCESS,
-          payload: res,
+          payload: { ...res, team_id: 1 },
         });
       });
 

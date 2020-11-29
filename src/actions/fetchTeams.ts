@@ -14,6 +14,7 @@ import { API_ENDPOINTS } from '../utils/constants';
 import { sleep } from '../utils/functions';
 
 const data = [
+  { id: 1, title: 'Virtus.Pro' },
   { id: 3201, title: 'Аренда автомобилей' },
   { id: 3273, title: 'Автотовары' },
   { id: 3205, title: 'Автосалон' },
@@ -56,6 +57,8 @@ const fetchTeams = () => {
     dispatch({ type: FETCHING_TEAMS });
 
     return sleep(500).then(() => {
+      console.log('then data', data);
+
       return dispatch({
         type: FETCHING_TEAMS_SUCCESS,
         payload: data,

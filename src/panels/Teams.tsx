@@ -5,11 +5,12 @@ import React, {
   useCallback,
 } from 'react';
 import { useDispatch } from 'react-redux';
-import { Route } from 'react-router-dom';
+import { useParams, Route } from 'react-router-dom';
 
 import { Modal } from '@test';
 
 import fetchTeams from '../actions/fetchTeams';
+import fetchTeam from '../actions/fetchTeam';
 
 import PanelWrapper from '../utils/wrappers/PanelWrapper';
 import {
@@ -43,6 +44,28 @@ type TeamsProps = {
 const Teams: React.FC<TeamsProps> = ({
   id,
 }: TeamsProps) => {
+  return (
+    <>
+      <Route
+        path="/teams"
+        exact
+        component={() => <TeamsIndex id={id} />}
+      />
+
+      <Route
+        path="/teams/:id"
+        exact
+        component={() => <TeamsItem id={id} />}
+      />
+    </>
+  );
+};
+
+type ChildProps = {
+  id: string;
+};
+
+const TeamsIndex = ({ id }: ChildProps) => {
   const [fetching, setFetching] = useState(true);
   const [activeModal, setActiveModal] = useState(
     null as Modal,
@@ -55,11 +78,11 @@ const Teams: React.FC<TeamsProps> = ({
 
   useEffect(() => {
     const fetchData = async () => {
-      console.log('user fetching...');
+      console.log('teams fetching...');
 
       await dispatch(fetchTeams());
 
-      console.log('user fetched');
+      console.log('teams fetched');
 
       setFetching(false);
     };
@@ -149,41 +172,135 @@ const Teams: React.FC<TeamsProps> = ({
   );
 
   return (
-    <>
-      <Route
-        path="/teams"
-        exact
-        component={() => (
-          <PanelWrapper id={id} fetching={fetching}>
-            <Panel id={id}>
-              <PanelHeader>Команды</PanelHeader>
-              <TeamsComponent />
-            </Panel>
-          </PanelWrapper>
-        )}
-      />
+    <PanelWrapper id={id} fetching={fetching}>
+      <Panel id={id}>
+        <PanelHeader>Команды</PanelHeader>
+        <TeamsComponent />
+      </Panel>
+    </PanelWrapper>
+  );
+};
 
-      <Route
-        path="/teams/:id"
-        exact
-        component={() => (
-          <PanelWrapper
-            id={id}
-            fetching={fetching}
-            modal={modal}
-          >
-            <Panel id={id}>
-              <PanelHeaderWithButton to="/teams">
-                Команда
-              </PanelHeaderWithButton>
-              <TeamsItemComponent
-                updateActiveModal={updateActiveModal}
-              />
-            </Panel>
-          </PanelWrapper>
-        )}
-      />
-    </>
+const TeamsItem = ({ id }: ChildProps) => {
+  const [fetching, setFetching] = useState(true);
+  const [activeModal, setActiveModal] = useState(
+    null as Modal,
+  );
+  const [modalHistory, setModalHistory] = useState(
+    [] as string[],
+  );
+
+  const dispatch = useDispatch();
+  const params: { id: string } = useParams();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      console.log('team params.id', params.id);
+
+      console.log('team fetching...');
+
+      await dispatch(fetchTeam(params.id));
+
+      console.log('team fetched');
+
+      setFetching(false);
+    };
+
+    fetchData();
+  }, []);
+
+  const updateActiveModal = useCallback(
+    (activeModal: Modal = null) => {
+      setActiveModal(() => activeModal);
+
+      if (activeModal === null) {
+        setModalHistory(() => []);
+      } else if (modalHistory.indexOf(activeModal) !== -1) {
+        setModalHistory((prev) =>
+          prev.splice(0, prev.indexOf(activeModal) + 1),
+        );
+      } else {
+        setModalHistory((prev) => [...prev, activeModal]);
+      }
+    },
+    [modalHistory],
+  );
+
+  const modalClose = useCallback(() => {
+    return updateActiveModal(
+      modalHistory[modalHistory.length - 2],
+    );
+  }, [modalHistory]);
+
+  const modalBack = useCallback(() => {
+    return updateActiveModal(
+      modalHistory[modalHistory.length - 2],
+    );
+  }, [modalHistory]);
+
+  const header = useCallback(
+    (title: string = '') => (
+      <ModalPageHeader
+        left={
+          IS_PLATFORM_ANDROID && (
+            <PanelHeaderButton onClick={modalBack}>
+              <Icon24Cancel />
+            </PanelHeaderButton>
+          )
+        }
+        right={
+          <PanelHeaderButton onClick={modalBack}>
+            {IS_PLATFORM_IOS ? 'Готово' : <Icon24Done />}
+          </PanelHeaderButton>
+        }
+      >
+        {title}
+      </ModalPageHeader>
+    ),
+    [],
+  );
+
+  const modal = useMemo(
+    () => (
+      <ModalRoot
+        activeModal={activeModal}
+        onClose={modalClose}
+      >
+        <ModalPage
+          id={MODAL_TYPES.MATCH_SCHEDULE}
+          header={header(MODAL_TITLES.MATCH_SCHEDULE)}
+        >
+          <Div>...</Div>
+        </ModalPage>
+        <ModalPage
+          id={MODAL_TYPES.STATISTICS}
+          header={header(MODAL_TITLES.STATISTICS)}
+        >
+          <Div>...</Div>
+        </ModalPage>
+
+        <ModalPage
+          id={MODAL_TYPES.LAST_GAMES}
+          header={header(MODAL_TITLES.LAST_GAMES)}
+        >
+          <Div>...</Div>
+        </ModalPage>
+      </ModalRoot>
+    ),
+    [activeModal, modalClose, modalBack],
+  );
+
+  return (
+    <PanelWrapper id={id} fetching={fetching} modal={modal}>
+      <Panel id={id}>
+        <PanelHeaderWithButton to="/teams">
+          Команда
+        </PanelHeaderWithButton>
+        <TeamsItemComponent
+          updateActiveModal={updateActiveModal}
+        />
+      </Panel>
+    </PanelWrapper>
   );
 };
 

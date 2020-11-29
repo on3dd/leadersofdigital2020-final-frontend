@@ -11,11 +11,11 @@ import Tabbar from '@vkontakte/vkui/dist/components/Tabbar/Tabbar';
 import TabbarItem from '@vkontakte/vkui/dist/components/TabbarItem/TabbarItem';
 
 import {
-  Icon28NewsfeedOutline,
-  Icon28ServicesOutline,
-  Icon28MessageOutline,
-  Icon28ClipOutline,
   Icon28UserCircleOutline,
+  Icon28Users3Outline,
+  Icon28UsersOutline,
+  Icon28GameOutline,
+  Icon28FavoriteOutline,
 } from '@vkontakte/icons';
 
 import OnboardingPanel from './Onboarding';
@@ -58,24 +58,24 @@ const Index: React.FC = () => {
             data-story="/profile"
             text="Профиль"
           >
-            <Icon28NewsfeedOutline />
+            <Icon28UserCircleOutline />
           </TabbarItem>
           <TabbarItem
             onClick={onClick}
             selected={pathname.includes('/teams')}
             data-story="/teams"
+            label="12"
             text="Команды"
           >
-            <Icon28ServicesOutline />
+            <Icon28Users3Outline />
           </TabbarItem>
           <TabbarItem
             onClick={onClick}
             selected={pathname.includes('/players')}
             data-story="/players"
-            label="12"
             text="Игроки"
           >
-            <Icon28MessageOutline />
+            <Icon28UsersOutline />
           </TabbarItem>
           <TabbarItem
             onClick={onClick}
@@ -83,7 +83,7 @@ const Index: React.FC = () => {
             data-story="/matches"
             text="Матчи"
           >
-            <Icon28ClipOutline />
+            <Icon28GameOutline />
           </TabbarItem>
           <TabbarItem
             onClick={onClick}
@@ -91,7 +91,7 @@ const Index: React.FC = () => {
             data-story="/ranks"
             text="Рейтинг"
           >
-            <Icon28UserCircleOutline />
+            <Icon28FavoriteOutline />
           </TabbarItem>
         </Tabbar>
       }

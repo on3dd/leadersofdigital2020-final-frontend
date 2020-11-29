@@ -1,5 +1,6 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useCallback } from 'react';
 import { useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 import { RootState } from '@test';
 
@@ -21,6 +22,7 @@ import Header from '@vkontakte/vkui/dist/components/Header/Header';
 import {
   Icon28InfoOutline,
   Icon28ListOutline,
+  Icon28Users3Outline,
 } from '@vkontakte/icons';
 
 type Props = {
@@ -40,9 +42,11 @@ const Profile: React.FC<Props> = ({
   // data,
   updateActiveModal,
 }: Props) => {
-  const data = useSelector(
+  const profile = useSelector(
     (state: RootState) => state.profile.data,
   );
+
+  const history = useHistory();
 
   const Achievement = () => (
     <div
@@ -60,20 +64,39 @@ const Profile: React.FC<Props> = ({
   );
 
   const name = useMemo(() => {
-    const firstName = data?.first_name || '';
-    const lastName = data?.last_name || '';
+    const firstName = profile?.first_name || '';
+    const lastName = profile?.last_name || '';
     return firstName && lastName
       ? `${firstName} ${lastName}`
       : 'Неопознанный Пользователь';
-  }, [data?.first_name, data?.last_name]);
+  }, [profile?.first_name, profile?.last_name]);
 
   const location = useMemo(() => {
-    const city = (data && data?.city.title) || '';
-    const country = (data && data?.country.title) || '';
+    const city = (profile && profile?.city.title) || '';
+    const country = (profile && profile?.country.title) || '';
     return city && country
       ? `${city}, ${country}`
       : 'Неизвестно';
-  }, [data?.city, data?.country]);
+  }, [profile?.city, profile?.country]);
+
+  const redirectToTeam = useCallback(() => {
+    return history.push(
+      profile.team_id ? `/teams/${profile.team_id}` : '/teams/',
+    );
+  }, [profile.team_id]);
+
+  const before = useMemo(() => {
+    return profile.team_id ? (
+      <Avatar
+        size={48}
+        src="https://upload.wikimedia.org/wikipedia/ru/thumb/4/4f/Virtus.proLogo.png/1200px-Virtus.proLogo.png"
+      />
+    ) : (
+      <Avatar size={48}>
+        <Icon28Users3Outline />
+      </Avatar>
+    );
+  }, []);
 
   return (
     <Div>
@@ -81,7 +104,7 @@ const Profile: React.FC<Props> = ({
         <Cell
           size="l"
           before={
-            <Avatar size={72} src={data?.photo_100} />
+            <Avatar size={72} src={profile?.photo_100} />
           }
           description={
             <Headline weight="regular">{location}</Headline>
@@ -94,31 +117,23 @@ const Profile: React.FC<Props> = ({
       </Group>
       <Group title="Team" separator="hide">
         <SimpleCell
-          disabled={!data.team_id}
-          description={!!data.team_id && 'Мид'}
-          before={
-            <Avatar
-              size={48}
-              src={
-                !!data.team_id
-                  ? 'https://upload.wikimedia.org/wikipedia/ru/thumb/4/4f/Virtus.proLogo.png/1200px-Virtus.proLogo.png'
-                  : ''
-              }
-            />
-          }
+          disabled={!profile.team_id}
+          onClick={redirectToTeam}
+          description={!!profile.team_id && 'Мид'}
+          before={before}
         >
-          {!!data.team_id
+          {!!profile.team_id
             ? 'Virtus.Pro'
-            : 'Вы не состоите в команде'}
+            : 'Вы еще не состоите в команде'}
         </SimpleCell>
       </Group>
       <Group title="Stats" separator="hide">
         <Cell
-          disabled={!data.team_id}
+          disabled={!profile.team_id}
           before={<Icon28InfoOutline />}
           asideContent={
             <Text weight="regular">
-              {!!data.team_id && '322 место'}
+              {!!profile.team_id && '322 место'}
             </Text>
           }
           onClick={() =>
@@ -130,11 +145,11 @@ const Profile: React.FC<Props> = ({
       </Group>
       <Group title="Last games" separator="hide">
         <Cell
-          disabled={!data.team_id}
+          disabled={!profile.team_id}
           before={<Icon28ListOutline />}
           asideContent={
             <Text weight="regular">
-              {!!data.team_id && '22W/8L'}
+              {!!profile.team_id && '22W/8L'}
             </Text>
           }
           onClick={() =>

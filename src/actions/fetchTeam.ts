@@ -13,6 +13,19 @@ import {
 import { API_ENDPOINTS } from '../utils/constants';
 import { sleep } from '../utils/functions';
 
+const team = {
+  id: 1,
+  title: 'Virtus.Pro',
+  tag: 'VP',
+  photo_100:
+    'https://upload.wikimedia.org/wikipedia/ru/thumb/4/4f/Virtus.proLogo.png/1200px-Virtus.proLogo.png',
+  photo_200:
+    'https://upload.wikimedia.org/wikipedia/ru/thumb/4/4f/Virtus.proLogo.png/1200px-Virtus.proLogo.png',
+  photo_max_orig:
+    'https://upload.wikimedia.org/wikipedia/ru/thumb/4/4f/Virtus.proLogo.png/1200px-Virtus.proLogo.png',
+  rating: 0,
+};
+
 const data = [
   { id: 3201, title: 'Аренда автомобилей' },
   { id: 3273, title: 'Автотовары' },
@@ -51,14 +64,17 @@ const data = [
   },
 }));
 
-const fetchTeam = (id: number) => {
+const fetchTeam = (id: string | number) => {
   return async (dispatch: Dispatch) => {
     dispatch({ type: FETCHING_TEAM });
 
     return sleep(500).then(() => {
       return dispatch({
         type: FETCHING_TEAM_SUCCESS,
-        payload: data.find((el) => el.id === id),
+        payload:
+          id === 'my'
+            ? team
+            : data.find((el) => el.id.toString() === id),
       });
     });
 
