@@ -5,6 +5,7 @@ import teamReducer from './team.reducer';
 import teamsReducer from './teams.reducer';
 import playerReducer from './player.reducer';
 import playersReducer from './players.reducer';
+import matchesReducer from './matches.reducer';
 
 export default combineReducers({
   profile: profileReducer,
@@ -12,4 +13,5 @@ export default combineReducers({
   teams: teamsReducer,
   player: playerReducer,
   players: playersReducer,
+  matches: matchesReducer,
 });

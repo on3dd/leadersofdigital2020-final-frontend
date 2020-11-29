@@ -39,6 +39,16 @@ declare module '@test' {
     steam_id: number;
   }
 
+  export interface Match {
+    id: 3201;
+    team_left: "Na'Vi";
+    team_left_image: '';
+    team_right: 'Alliance';
+    team_right_image: '';
+    live: true;
+    date: '';
+  }
+
   export type Modal = string | null;
 
   export interface ModalTypes {
@@ -62,6 +72,7 @@ declare module '@test' {
   export interface TeamsState extends State<Team[]> {}
   export interface PlayerState extends State<Player> {}
   export interface PlayersState extends State<Player[]> {}
+  export interface MatchesState extends State<Match[]> {}
 
   export interface RootState {
     profile: ProfileState;
@@ -69,6 +80,7 @@ declare module '@test' {
     teams: TeamsState;
     player: PlayerState;
     players: PlayersState;
+    matches: MatchesState;
   }
 
   export interface ChildProps {

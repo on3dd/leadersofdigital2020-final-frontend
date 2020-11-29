@@ -4,7 +4,10 @@ import React, {
   useMemo,
   useCallback,
 } from 'react';
+import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+
+import { RootState } from '@test';
 
 import Group from '@vkontakte/vkui/dist/components/Group/Group';
 import Div from '@vkontakte/vkui/dist/components/Div/Div';
@@ -29,57 +32,61 @@ type MatchProps = {
   onClick: (to: SyntheticEvent<HTMLElement>) => void;
 };
 
-const Match: React.FC<MatchProps> = ({
-  live,
-  date,
-  onClick,
-}) => (
-  <RichCell onClick={onClick}>
-    <div
-      style={{
-        display: 'flex',
-        justifyContent: 'space-between',
-      }}
-    >
-      <div>
-        <Avatar src="https://upload.wikimedia.org/wikipedia/ru/2/2c/NAVI_logo.png" />
-      </div>
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}
-      >
-        <div className="top-row" style={{}}>
-          <Headline weight="semibold">
-            {"Na'Vi | Alliance".toUpperCase()}
-          </Headline>
-        </div>
+// const Match: React.FC<MatchProps> = ({
+//   live,
+//   date,
+//   onClick,
+// }) => (
+//   <RichCell onClick={onClick}>
+//     <div
+//       style={{
+//         display: 'flex',
+//         justifyContent: 'space-between',
+//       }}
+//     >
+//       <div>
+//         <Avatar src="https://upload.wikimedia.org/wikipedia/ru/2/2c/NAVI_logo.png" />
+//       </div>
+//       <div
+//         style={{
+//           display: 'flex',
+//           flexDirection: 'column',
+//           justifyContent: 'center',
+//           alignItems: 'center',
+//         }}
+//       >
+//         <div className="top-row" style={{}}>
+//           <Headline weight="semibold">
+//             {"Na'Vi | Alliance".toUpperCase()}
+//           </Headline>
+//         </div>
 
-        <div className="top-row">
-          <Text
-            weight={live ? 'semibold' : 'regular'}
-            style={{
-              color: live ? 'red' : 'rgb(129, 140, 153)',
-              fontSize: '0.9rem',
-            }}
-          >
-            {live ? 'LIVE' : date}
-          </Text>
-        </div>
-      </div>
-      <div>
-        <Avatar src="https://i.imgur.com/H7jhECD.png" />
-      </div>
-    </div>
-  </RichCell>
-);
+//         <div className="top-row">
+//           <Text
+//             weight={live ? 'semibold' : 'regular'}
+//             style={{
+//               color: live ? 'red' : 'rgb(129, 140, 153)',
+//               fontSize: '0.9rem',
+//             }}
+//           >
+//             {live ? 'LIVE' : date}
+//           </Text>
+//         </div>
+//       </div>
+//       <div>
+//         <Avatar src="https://i.imgur.com/H7jhECD.png" />
+//       </div>
+//     </div>
+//   </RichCell>
+// );
 
 const Profile: React.FC<Props> = ({
   updateActiveModal,
 }: Props) => {
+  const matches = useSelector(
+    (state: RootState) => state.matches.data,
+  );
+
   const onClick = useCallback(
     (e: SyntheticEvent<HTMLElement>) => {
       updateActiveModal(MODAL_TYPES.INSPECT_MATCH);
@@ -110,15 +117,55 @@ const Profile: React.FC<Props> = ({
         header={<Header>Текущие матчи</Header>}
       >
         <List>
-          <Match live={true} onClick={onClick} />
-          <Match date={'28.11, 15:00'} onClick={onClick} />
-          <Match date={'28.11, 15:30'} onClick={onClick} />
-          <Match date={'28.11, 16:00'} onClick={onClick} />
-          <Match date={'28.11, 16:30'} onClick={onClick} />
-          <Match date={'28.11, 17:00'} onClick={onClick} />
-          <Match date={'28.11, 17:30'} onClick={onClick} />
-          <Match date={'28.11, 18:00'} onClick={onClick} />
-          <Match date={'28.11, 18:30'} onClick={onClick} />
+          {matches.map((item) => {
+            return (
+              <RichCell key={item.id} onClick={onClick}>
+                <div
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                  }}
+                >
+                  <div>
+                    <Avatar src={item.team_left_image} />
+                  </div>
+                  <div
+                    style={{
+                      display: 'flex',
+                      flexDirection: 'column',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                    }}
+                  >
+                    <div className="top-row" style={{}}>
+                      <Headline weight="semibold">
+                        {`${item.team_left} | ${item.team_right}`.toUpperCase()}
+                      </Headline>
+                    </div>
+
+                    <div className="top-row">
+                      <Text
+                        weight={
+                          item.live ? 'semibold' : 'regular'
+                        }
+                        style={{
+                          color: item.live
+                            ? 'red'
+                            : 'rgb(129, 140, 153)',
+                          fontSize: '0.9rem',
+                        }}
+                      >
+                        {item.live ? 'LIVE' : item.date}
+                      </Text>
+                    </div>
+                  </div>
+                  <div>
+                    <Avatar src={item.team_right_image} />
+                  </div>
+                </div>
+              </RichCell>
+            );
+          })}
         </List>
       </Group>
     </Div>

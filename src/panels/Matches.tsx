@@ -1,11 +1,15 @@
 import React, {
   useState,
+  useEffect,
   useMemo,
   useCallback,
 } from 'react';
+import { useDispatch } from 'react-redux';
 import { Route } from 'react-router-dom';
 
 import { Modal } from '@test';
+
+import fetchMatches from '../actions/fetchMatches';
 
 import PanelWrapper from '../utils/wrappers/PanelWrapper';
 import {
@@ -44,13 +48,29 @@ type MatchesProps = {
 const Matches: React.FC<MatchesProps> = ({
   id,
 }: MatchesProps) => {
-  const [fetching] = useState(false);
+  const [fetching, setFetching] = useState(true);
   const [activeModal, setActiveModal] = useState(
     null as Modal,
   );
   const [modalHistory, setModalHistory] = useState(
     [] as string[],
   );
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      console.log('matches fetching...');
+
+      await dispatch(fetchMatches());
+
+      console.log('matches fetched');
+
+      setFetching(false);
+    };
+
+    fetchData();
+  }, []);
 
   const updateActiveModal = useCallback(
     (activeModal: Modal = null) => {
@@ -153,41 +173,24 @@ const Matches: React.FC<MatchesProps> = ({
   );
 
   return (
-    <>
-      <Route
-        path="/matches"
-        exact
-        component={() => (
-          <PanelWrapper
-            id={id}
-            fetching={fetching}
-            modal={modal}
-          >
-            <Panel id={id}>
-              <PanelHeader>Матчи</PanelHeader>
-              <MatchesComponent
-                updateActiveModal={updateActiveModal}
-              />
-            </Panel>
-          </PanelWrapper>
-        )}
-      />
-
-      {/* <Route
-        path="/matches/:id"
-        exact
-        component={() => (
-          <PanelWrapper id={id} fetching={fetching}>
-            <Panel id={id}>
-              <PanelHeaderWithButton to="/matches">
-                Матч
-              </PanelHeaderWithButton>
-              <MatchesItemComponent />
-            </Panel>
-          </PanelWrapper>
-        )}
-        />*/}
-    </>
+    <Route
+      path="/matches"
+      exact
+      component={() => (
+        <PanelWrapper
+          id={id}
+          fetching={fetching}
+          modal={modal}
+        >
+          <Panel id={id}>
+            <PanelHeader>Матчи</PanelHeader>
+            <MatchesComponent
+              updateActiveModal={updateActiveModal}
+            />
+          </Panel>
+        </PanelWrapper>
+      )}
+    />
   );
 };
 

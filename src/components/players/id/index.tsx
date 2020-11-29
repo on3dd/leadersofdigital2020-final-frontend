@@ -76,7 +76,10 @@ const Profile: React.FC<Props> = ({
         >
           <Title weight="bold" level="3">
             {/* {`${player.first_name} ${player.last_name}`} */}
-            {(player as any).title}
+            {
+              // TODO: FIX ANY AND TITLE
+              (player as any).title
+            }
           </Title>
         </Cell>
       </Group>

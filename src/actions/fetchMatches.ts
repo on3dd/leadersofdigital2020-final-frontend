@@ -14,42 +14,117 @@ import { API_ENDPOINTS } from '../utils/constants';
 import { sleep } from '../utils/functions';
 
 const data = [
-  { id: 3201, name: 'Аренда автомобилей' },
-  { id: 3273, name: 'Автотовары' },
-  { id: 3205, name: 'Автосалон' },
-  { id: 3282, name: 'Автосервис' },
-  { id: 3283, name: 'Услуги для автовладельцев' },
-  { id: 3284, name: 'Велосипеды' },
-  { id: 3285, name: 'Мотоциклы и другая мототехника' },
-  { id: 3286, name: 'Водный транспорт' },
-  { id: 3287, name: 'Автопроизводитель' },
-  { id: 3288, name: 'Автомойка' },
-  { id: 3117, name: 'Автошкола' },
-  { id: 3118, name: 'Детский сад' },
-  { id: 3119, name: 'Гимназия' },
-  { id: 3120, name: 'Колледж' },
-  { id: 3121, name: 'Лицей' },
-  { id: 3122, name: 'Техникум' },
-  { id: 3123, name: 'Университет' },
-  { id: 3124, name: 'Школа' },
-  { id: 3125, name: 'Институт' },
-  { id: 3126, name: 'Обучающие курсы' },
-  { id: 3276, name: 'Дополнительное образование' },
-  { id: 3275, name: 'Тренинг, семинар' },
-  { id: 3127, name: 'Танцевальная школа' },
-].map((el) => ({
-  ...el,
-  ...{
-    tag: 'BRUH',
-    photo_100:
-      'https://upload.wikimedia.org/wikipedia/ru/2/2c/NAVI_logo.png',
-    photo_200:
-      'https://upload.wikimedia.org/wikipedia/ru/2/2c/NAVI_logo.png',
-    photo_max_orig:
-      'https://upload.wikimedia.org/wikipedia/ru/2/2c/NAVI_logo.png',
-    rating: 0,
+  {
+    id: 3201,
+    team_left: "Na'Vi",
+    team_left_image:
+      'https://upload.wikimedia.org/wikipedia/en/thumb/a/ac/NaVi_logo.svg/1200px-NaVi_logo.svg.png',
+    team_right: 'Alliance',
+    team_right_image:
+      'https://pbs.twimg.com/profile_images/1323175247055564800/bjOJr3VD.jpg',
+    live: true,
+    date: '',
   },
-}));
+  {
+    id: 3202,
+    team_left: 'VP.P',
+    team_left_image:
+      'https://pbs.twimg.com/profile_images/1245452558627409921/gtBLseMT_400x400.jpg',
+    team_right: 'Nigma',
+    team_right_image:
+      'https://images.prismic.io/rivalryglhf/79e23f1b-fc88-4ddd-bee2-de7f1a45028a_nigma.jpg?auto=compress,format',
+    live: true,
+    date: '',
+  },
+  {
+    id: 3203,
+    team_left: "Na'Vi",
+    team_left_image:
+      'https://upload.wikimedia.org/wikipedia/en/thumb/a/ac/NaVi_logo.svg/1200px-NaVi_logo.svg.png',
+    team_right: 'Alliance',
+    team_right_image:
+      'https://pbs.twimg.com/profile_images/1323175247055564800/bjOJr3VD.jpg',
+    live: false,
+    date: '30.11 15:00',
+  },
+  {
+    id: 3204,
+    team_left: 'VP.P',
+    team_left_image:
+      'https://pbs.twimg.com/profile_images/1245452558627409921/gtBLseMT_400x400.jpg',
+    team_right: 'Nigma',
+    team_right_image:
+      'https://images.prismic.io/rivalryglhf/79e23f1b-fc88-4ddd-bee2-de7f1a45028a_nigma.jpg?auto=compress,format',
+    live: false,
+    date: '30.11 16:00',
+  },
+  {
+    id: 3205,
+    team_left: "Na'Vi",
+    team_left_image:
+      'https://upload.wikimedia.org/wikipedia/en/thumb/a/ac/NaVi_logo.svg/1200px-NaVi_logo.svg.png',
+    team_right: 'Alliance',
+    team_right_image:
+      'https://pbs.twimg.com/profile_images/1323175247055564800/bjOJr3VD.jpg',
+    live: false,
+    date: '30.11 17:00',
+  },
+  {
+    id: 3206,
+    team_left: 'VP.P',
+    team_left_image:
+      'https://pbs.twimg.com/profile_images/1245452558627409921/gtBLseMT_400x400.jpg',
+    team_right: 'Nigma',
+    team_right_image:
+      'https://images.prismic.io/rivalryglhf/79e23f1b-fc88-4ddd-bee2-de7f1a45028a_nigma.jpg?auto=compress,format',
+    live: false,
+    date: '30.11 18:00',
+  },
+  {
+    id: 3207,
+    team_left: "Na'Vi",
+    team_left_image:
+      'https://upload.wikimedia.org/wikipedia/en/thumb/a/ac/NaVi_logo.svg/1200px-NaVi_logo.svg.png',
+    team_right: 'Alliance',
+    team_right_image:
+      'https://pbs.twimg.com/profile_images/1323175247055564800/bjOJr3VD.jpg',
+    live: false,
+    date: '30.11 19:00',
+  },
+  {
+    id: 3208,
+    team_left: 'VP.P',
+    team_left_image:
+      'https://pbs.twimg.com/profile_images/1245452558627409921/gtBLseMT_400x400.jpg',
+    team_right: 'Nigma',
+    team_right_image:
+      'https://images.prismic.io/rivalryglhf/79e23f1b-fc88-4ddd-bee2-de7f1a45028a_nigma.jpg?auto=compress,format',
+    live: false,
+    date: '31.11 14:00',
+  },
+  {
+    id: 3209,
+    team_left: "Na'Vi",
+    team_left_image:
+      'https://upload.wikimedia.org/wikipedia/en/thumb/a/ac/NaVi_logo.svg/1200px-NaVi_logo.svg.png',
+    team_right: 'Alliance',
+    team_right_image:
+      'https://pbs.twimg.com/profile_images/1323175247055564800/bjOJr3VD.jpg',
+    live: false,
+    date: '31.11 15:00',
+  },
+  {
+    id: 3210,
+    team_left: 'VP.P',
+    team_left_image:
+      'https://pbs.twimg.com/profile_images/1245452558627409921/gtBLseMT_400x400.jpg',
+    team_right: 'Nigma',
+    team_right_image:
+      'https://images.prismic.io/rivalryglhf/79e23f1b-fc88-4ddd-bee2-de7f1a45028a_nigma.jpg?auto=compress,format',
+    live: false,
+    date: '31.11 16:00',
+  },
+];
 
 const fetchMatches = () => {
   return async (dispatch: Dispatch) => {
