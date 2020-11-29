@@ -40,25 +40,23 @@ const data = [
 ].map((el) => ({
   ...el,
   ...{
-    tag: 'BRUH',
     photo_100:
-      'https://upload.wikimedia.org/wikipedia/ru/2/2c/NAVI_logo.png',
+      'https://pbs.twimg.com/profile_images/1280494492974493698/KqYCFM3j.jpg',
     photo_200:
-      'https://upload.wikimedia.org/wikipedia/ru/2/2c/NAVI_logo.png',
+      'https://pbs.twimg.com/profile_images/1280494492974493698/KqYCFM3j.jpg',
     photo_max_orig:
-      'https://upload.wikimedia.org/wikipedia/ru/2/2c/NAVI_logo.png',
-    rating: 0,
+      'https://pbs.twimg.com/profile_images/1280494492974493698/KqYCFM3j.jpg',
   },
 }));
 
-const fetchPlayer = (id: number) => {
+const fetchPlayer = (id: number | string) => {
   return async (dispatch: Dispatch) => {
     dispatch({ type: FETCHING_PLAYER });
 
     return sleep(500).then(() => {
       return dispatch({
         type: FETCHING_PLAYER_SUCCESS,
-        payload: data.find((el) => el.id === id),
+        payload: data.find((el) => el.id.toString() === id),
       });
     });
 

@@ -64,9 +64,13 @@ const Profile: React.FC = () => {
   );
 
   const onClick = useCallback(
-    (e: SyntheticEvent<HTMLElement>) => {
+    (
+      e: SyntheticEvent<HTMLElement>,
+      id: string | number = '',
+    ) => {
+      console.log('redirect id...', id);
       console.log('redirecting...');
-      return history.push('/players/1');
+      return history.push(`/players/${id}`);
     },
     [history],
   );
@@ -79,7 +83,7 @@ const Profile: React.FC = () => {
           .toLowerCase()
           .indexOf(str) > -1,
     );
-  }, [search]);
+  }, [search, data]);
 
   return (
     <Div>
@@ -107,7 +111,12 @@ const Profile: React.FC = () => {
                 }
                 actions={
                   <React.Fragment>
-                    <Button size="m" onClick={onClick}>
+                    <Button
+                      size="m"
+                      onClick={(evt) =>
+                        onClick(evt, item.id)
+                      }
+                    >
                       Подробнее
                     </Button>
                     <Button size="m" mode="secondary">

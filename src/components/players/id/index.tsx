@@ -1,4 +1,7 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
+
+import { RootState } from '@test';
 
 import { MODAL_TYPES } from '../../../utils/constants';
 
@@ -36,6 +39,12 @@ const achivementStyles = {
 const Profile: React.FC<Props> = ({
   updateActiveModal,
 }: Props) => {
+  const player = useSelector(
+    (state: RootState) => state.player.data,
+  );
+
+  console.log('team item', player);
+
   const Achievement = () => (
     <div
       style={{ ...achivementStyles }}
@@ -57,10 +66,7 @@ const Profile: React.FC<Props> = ({
         <Cell
           size="l"
           before={
-            <Avatar
-              size={72}
-              src="https://pbs.twimg.com/profile_images/1280494492974493698/KqYCFM3j.jpg"
-            />
+            <Avatar size={72} src={player.photo_100} />
           }
           description={
             <Headline weight="regular">
@@ -69,7 +75,8 @@ const Profile: React.FC<Props> = ({
           }
         >
           <Title weight="bold" level="3">
-            Владимир Миненко
+            {/* {`${player.first_name} ${player.last_name}`} */}
+            {(player as any).title}
           </Title>
         </Cell>
       </Group>

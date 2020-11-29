@@ -5,11 +5,12 @@ import React, {
   useCallback,
 } from 'react';
 import { useDispatch } from 'react-redux';
-import { Route } from 'react-router-dom';
+import { useParams, Route } from 'react-router-dom';
 
-import { Modal } from '@test';
+import { ChildProps, Modal } from '@test';
 
 import fetchPlayers from '../actions/fetchPlayers';
+import fetchPlayer from '../actions/fetchPlayer';
 
 import PanelWrapper from '../utils/wrappers/PanelWrapper';
 import {
@@ -45,6 +46,24 @@ type PlayersProps = {
 const Players: React.FC<PlayersProps> = ({
   id,
 }: PlayersProps) => {
+  return (
+    <>
+      <Route
+        path="/players"
+        exact
+        component={() => <PlayersIndex id={id} />}
+      />
+
+      <Route
+        path="/players/:id"
+        exact
+        component={() => <PlayersItem id={id} />}
+      />
+    </>
+  );
+};
+
+const PlayersIndex = ({ id }: ChildProps) => {
   const [fetching, setFetching] = useState(true);
   const [activeModal, setActiveModal] = useState(
     null as Modal,
@@ -168,41 +187,149 @@ const Players: React.FC<PlayersProps> = ({
   );
 
   return (
-    <>
-      <Route
-        path="/players"
-        exact
-        component={() => (
-          <PanelWrapper id={id} fetching={fetching}>
-            <Panel id={id}>
-              <PanelHeader>Игроки</PanelHeader>
-              <PlayersComponent />
-            </Panel>
-          </PanelWrapper>
-        )}
-      />
+    <PanelWrapper id={id} fetching={fetching}>
+      <Panel id={id}>
+        <PanelHeader>Игроки</PanelHeader>
+        <PlayersComponent />
+      </Panel>
+    </PanelWrapper>
+  );
+};
 
-      <Route
-        path="/players/:id"
-        exact
-        component={() => (
-          <PanelWrapper
-            id={id}
-            fetching={fetching}
-            modal={modal}
-          >
-            <Panel id={id}>
-              <PanelHeaderWithButton to="/players">
-                Игрок
-              </PanelHeaderWithButton>
-              <PlayersItemComponent
-                updateActiveModal={updateActiveModal}
-              />
-            </Panel>
-          </PanelWrapper>
-        )}
-      />
-    </>
+const PlayersItem = ({ id }: ChildProps) => {
+  const [fetching, setFetching] = useState(true);
+  const [activeModal, setActiveModal] = useState(
+    null as Modal,
+  );
+  const [modalHistory, setModalHistory] = useState(
+    [] as string[],
+  );
+
+  const dispatch = useDispatch();
+  const params: { id: string } = useParams();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      console.log('player params.id', params.id);
+      console.log('player fetching...');
+
+      await dispatch(fetchPlayer(params.id));
+
+      console.log('player fetched');
+
+      setFetching(false);
+    };
+
+    fetchData();
+  }, []);
+
+  const updateActiveModal = useCallback(
+    (activeModal: Modal = null) => {
+      setActiveModal(() => activeModal);
+
+      if (activeModal === null) {
+        setModalHistory(() => []);
+      } else if (modalHistory.indexOf(activeModal) !== -1) {
+        setModalHistory((prev) =>
+          prev.splice(0, prev.indexOf(activeModal) + 1),
+        );
+      } else {
+        setModalHistory((prev) => [...prev, activeModal]);
+      }
+    },
+    [modalHistory],
+  );
+
+  const modalClose = useCallback(() => {
+    return updateActiveModal(
+      modalHistory[modalHistory.length - 2],
+    );
+  }, [modalHistory]);
+
+  const modalBack = useCallback(() => {
+    return updateActiveModal(
+      modalHistory[modalHistory.length - 2],
+    );
+  }, [modalHistory]);
+
+  const header = useCallback(
+    (title: string = '', card?: boolean) => (
+      <ModalPageHeader
+        left={
+          !card &&
+          IS_PLATFORM_ANDROID && (
+            <PanelHeaderButton onClick={modalBack}>
+              <Icon24Cancel />
+            </PanelHeaderButton>
+          )
+        }
+        right={
+          !card && (
+            <PanelHeaderButton onClick={modalBack}>
+              {IS_PLATFORM_IOS ? 'Готово' : <Icon24Done />}
+            </PanelHeaderButton>
+          )
+        }
+      >
+        {title}
+      </ModalPageHeader>
+    ),
+    [],
+  );
+
+  const modal = useMemo(
+    () => (
+      <ModalRoot
+        activeModal={activeModal}
+        onClose={modalClose}
+      >
+        <ModalPage
+          id={MODAL_TYPES.STATISTICS}
+          header={header(MODAL_TITLES.STATISTICS)}
+        >
+          <Div>...</Div>
+        </ModalPage>
+
+        <ModalPage
+          id={MODAL_TYPES.LAST_GAMES}
+          header={header(MODAL_TITLES.LAST_GAMES)}
+        >
+          <Div>...</Div>
+        </ModalPage>
+
+        <ModalCard
+          id={MODAL_TYPES.ACHIEVEMENTS}
+          header={header(MODAL_TITLES.ACHIEVEMENTS, true)}
+          caption="Номер карты получателя не нужен — он сам решит, куда зачислить средства."
+          icon={
+            <Avatar
+              size={72}
+              src="https://cdn.dota2.com/apps/dota2/images/heroes/pudge_vert.jpg?v=5027641"
+            />
+          }
+          onClose={modalClose}
+          actions={[
+            {
+              title: 'Поделиться',
+              mode: 'primary',
+              action: modalClose,
+            },
+          ]}
+        />
+      </ModalRoot>
+    ),
+    [activeModal, modalClose, modalBack],
+  );
+
+  return (
+    <PanelWrapper id={id} fetching={fetching} modal={modal}>
+      <Panel id={id}>
+        <PanelHeader>Игрок</PanelHeader>
+        <PlayersItemComponent
+          updateActiveModal={updateActiveModal}
+        />
+      </Panel>
+    </PanelWrapper>
   );
 };
 

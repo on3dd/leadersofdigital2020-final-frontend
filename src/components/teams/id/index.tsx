@@ -54,9 +54,7 @@ const NewsItem: React.FC<Props> = ({
     (state: RootState) => state.team.data,
   );
 
-  console.log('====================================');
   console.log('team item', team);
-  console.log('====================================');
 
   const params: { id: string } = useParams();
 

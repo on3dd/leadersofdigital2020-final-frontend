@@ -70,4 +70,8 @@ declare module '@test' {
     player: PlayerState;
     players: PlayersState;
   }
+
+  export interface ChildProps {
+    id: string;
+  }
 }

@@ -7,7 +7,7 @@ import React, {
 import { useDispatch } from 'react-redux';
 import { useParams, Route } from 'react-router-dom';
 
-import { Modal } from '@test';
+import { ChildProps, Modal } from '@test';
 
 import fetchTeams from '../actions/fetchTeams';
 import fetchTeam from '../actions/fetchTeam';
@@ -59,10 +59,6 @@ const Teams: React.FC<TeamsProps> = ({
       />
     </>
   );
-};
-
-type ChildProps = {
-  id: string;
 };
 
 const TeamsIndex = ({ id }: ChildProps) => {
