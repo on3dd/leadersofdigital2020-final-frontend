@@ -73,7 +73,8 @@ const Profile: React.FC<Props> = ({
 
   const location = useMemo(() => {
     const city = (profile && profile?.city.title) || '';
-    const country = (profile && profile?.country.title) || '';
+    const country =
+      (profile && profile?.country.title) || '';
     return city && country
       ? `${city}, ${country}`
       : 'Неизвестно';
@@ -81,7 +82,7 @@ const Profile: React.FC<Props> = ({
 
   const redirectToTeam = useCallback(() => {
     return history.push(
-      profile.team_id ? `/teams/${profile.team_id}` : '/teams/',
+      profile.team_id ? '/teams/my' : '/teams/',
     );
   }, [profile.team_id]);
 

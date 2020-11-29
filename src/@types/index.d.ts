@@ -58,6 +58,7 @@ declare module '@test' {
     MATCH_SCHEDULE: 'MATCH_SCHEDULE';
     CREATE_MATCH: 'CREATE_MATCH';
     INSPECT_MATCH: 'INSPECT_MATCH';
+    SELECT_TEAM: 'SELECT_TEAM';
   }
 
   export interface State<T> {

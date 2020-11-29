@@ -23,7 +23,7 @@ const data = [
     team_right_image:
       'https://pbs.twimg.com/profile_images/1323175247055564800/bjOJr3VD.jpg',
     live: true,
-    date: '',
+    date: '29.11 15:00',
   },
   {
     id: 3202,
@@ -34,7 +34,7 @@ const data = [
     team_right_image:
       'https://images.prismic.io/rivalryglhf/79e23f1b-fc88-4ddd-bee2-de7f1a45028a_nigma.jpg?auto=compress,format',
     live: true,
-    date: '',
+    date: '29.11 16:00',
   },
   {
     id: 3203,

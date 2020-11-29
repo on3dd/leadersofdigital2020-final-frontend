@@ -26,60 +26,6 @@ type Props = {
   updateActiveModal: (modal: any) => void; // TODO: FIX ANY
 };
 
-type MatchProps = {
-  live?: boolean;
-  date?: string;
-  onClick: (to: SyntheticEvent<HTMLElement>) => void;
-};
-
-// const Match: React.FC<MatchProps> = ({
-//   live,
-//   date,
-//   onClick,
-// }) => (
-//   <RichCell onClick={onClick}>
-//     <div
-//       style={{
-//         display: 'flex',
-//         justifyContent: 'space-between',
-//       }}
-//     >
-//       <div>
-//         <Avatar src="https://upload.wikimedia.org/wikipedia/ru/2/2c/NAVI_logo.png" />
-//       </div>
-//       <div
-//         style={{
-//           display: 'flex',
-//           flexDirection: 'column',
-//           justifyContent: 'center',
-//           alignItems: 'center',
-//         }}
-//       >
-//         <div className="top-row" style={{}}>
-//           <Headline weight="semibold">
-//             {"Na'Vi | Alliance".toUpperCase()}
-//           </Headline>
-//         </div>
-
-//         <div className="top-row">
-//           <Text
-//             weight={live ? 'semibold' : 'regular'}
-//             style={{
-//               color: live ? 'red' : 'rgb(129, 140, 153)',
-//               fontSize: '0.9rem',
-//             }}
-//           >
-//             {live ? 'LIVE' : date}
-//           </Text>
-//         </div>
-//       </div>
-//       <div>
-//         <Avatar src="https://i.imgur.com/H7jhECD.png" />
-//       </div>
-//     </div>
-//   </RichCell>
-// );
-
 const Profile: React.FC<Props> = ({
   updateActiveModal,
 }: Props) => {
@@ -116,7 +62,7 @@ const Profile: React.FC<Props> = ({
         title="Search"
         header={<Header>Текущие матчи</Header>}
       >
-        <List>
+        <List style={{ marginBottom: '50px' }}>
           {matches.map((item) => {
             return (
               <RichCell key={item.id} onClick={onClick}>
