@@ -44,6 +44,10 @@ const createMatch = (data: TeamDraft) => {
       (el) => el.id === data.team_right_id,
     );
 
+    console.log('====================================');
+    console.log('data.team_right_id', data.team_right_id);
+    console.log('====================================');
+
     const id = teams[teams.length - 1].id + 1;
 
     return sleep(500).then(() => {

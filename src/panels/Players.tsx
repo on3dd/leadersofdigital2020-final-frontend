@@ -324,7 +324,9 @@ const PlayersItem = ({ id }: ChildProps) => {
   return (
     <PanelWrapper id={id} fetching={fetching} modal={modal}>
       <Panel id={id}>
-        <PanelHeader>Игрок</PanelHeader>
+        <PanelHeaderWithButton to="/players">
+          Игрок
+        </PanelHeaderWithButton>
         <PlayersItemComponent
           updateActiveModal={updateActiveModal}
         />

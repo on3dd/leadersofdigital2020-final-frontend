@@ -50,12 +50,6 @@ type MatchesProps = {
   id: string;
 };
 
-const TEAMS = {
-  NAVI: 'Natus Vincere',
-  ALLIANCE: 'Alliance',
-  NIGMA: 'Nigma',
-};
-
 type SelectedTeam = Team | null;
 type SelectedDate = string;
 type SelectedTime = string;
@@ -106,7 +100,7 @@ const Matches: React.FC<MatchesProps> = ({
 
   useEffect(() => {
     setSelectedTeam(() => teams[0]);
-  }, [teams[0]]);
+  }, [teams, teams.length]);
 
   const updateActiveModal = useCallback(
     (activeModal: Modal = null) => {
@@ -164,10 +158,16 @@ const Matches: React.FC<MatchesProps> = ({
 
   const submit = useCallback(() => {
     console.log('====================================');
+    console.log('submit selectedTeam', selectedTeam);
+    console.log(
+      'team_right_id',
+      (!!selectedTeam && selectedTeam?.id) || 0,
+    );
+
     console.log('submit data', {
       team_left_id: 1,
       team_right_id:
-        (selectedTeam && selectedTeam?.id) || 0,
+        (!!selectedTeam && selectedTeam?.id) || 0,
       date: selectedDate,
       time: selectedTime,
     });

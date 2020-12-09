@@ -94,7 +94,7 @@ const NewsItem: React.FC<Props> = ({
                 weight="regular"
                 style={{ ...textStyle }}
               >
-                Мид
+                Carry
               </Text>
             </div>
             <div style={itemStyle}>
@@ -106,7 +106,7 @@ const NewsItem: React.FC<Props> = ({
                 weight="regular"
                 style={{ ...textStyle }}
               >
-                Мид
+                Mid
               </Text>
             </div>
             <div style={itemStyle}>
@@ -118,7 +118,7 @@ const NewsItem: React.FC<Props> = ({
                 weight="regular"
                 style={{ ...textStyle }}
               >
-                Мид
+                Offlane
               </Text>
             </div>
             <div style={itemStyle}>
@@ -130,7 +130,7 @@ const NewsItem: React.FC<Props> = ({
                 weight="regular"
                 style={{ ...textStyle }}
               >
-                Мид
+                Semi-support
               </Text>
             </div>
             <div style={itemStyle}>
@@ -142,7 +142,7 @@ const NewsItem: React.FC<Props> = ({
                 weight="regular"
                 style={{ ...textStyle }}
               >
-                Мид
+                Full-support
               </Text>
             </div>
           </div>
